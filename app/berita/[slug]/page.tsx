@@ -34,7 +34,7 @@ export async function generateMetadata({
   };
 
   const title = article?.title || fallbackTitles[slug] || "Berita & Kabar";
-  const desc = article?.excerpt || "Baca selengkapnya mengenai kabar terhangat di SD Negeri Parang 5 Magetan.";
+  const desc = article?.excerpt || "Baca selengkapnya mengenai kabar terhangat di SD Negeri Parang 5 Kediri.";
 
   return {
     title,
@@ -73,13 +73,13 @@ const fallbackArticles: Record<
     title: "Kegiatan KKN Universitas Negeri Malang di SDN Parang 5",
     publishedAt: "2026-06-20T12:00:00.000Z",
     excerpt:
-      "Mahasiswa KKN dari Universitas Negeri Malang menyelenggarakan pendampingan digitalisasi profil sekolah, pendataan aset, serta pelatihan operasional web CMS bagi jajaran guru SDN Parang 5 Magetan.",
+      "Mahasiswa KKN dari Universitas Negeri Malang menyelenggarakan pendampingan digitalisasi profil sekolah, pendataan aset, serta pelatihan operasional web CMS bagi jajaran guru SDN Parang 5 Kediri.",
     bodyHtml: (
       <div className="prose max-w-none text-gray-700 leading-relaxed font-body flex flex-col gap-4">
         <p>
           Kelompok mahasiswa Kuliah Kerja Nyata (KKN) dari Universitas Negeri Malang secara resmi meluncurkan
           program pengabdian masyarakat bertajuk digitalisasi manajemen dan branding sekolah dasar di SD
-          Negeri Parang 5, Magetan. Kegiatan ini bertujuan merapikan publikasi informasi sekolah yang sebelumnya
+          Negeri Parang 5, Kediri. Kegiatan ini bertujuan merapikan publikasi informasi sekolah yang sebelumnya
           terpecah di banyak Google Drive dan tautan PDF eksternal.
         </p>
         <h2 className="text-xl font-bold text-navy mt-4 font-heading">Pendampingan Pengoperasian Website</h2>
@@ -90,7 +90,7 @@ const fallbackArticles: Record<
         </p>
         <blockquote>
           “Kami berharap website resmi ini dapat mempermudah orang tua mendapatkan informasi perkembangan putra-putrinya
-          sekaligus mendongkrak citra sekolah dasar di mata publik Magetan,” ujar koordinator mahasiswa KKN.
+          sekaligus mendongkrak citra sekolah dasar di mata publik Kediri,” ujar koordinator mahasiswa KKN.
         </blockquote>
         <p>
           Kepala Sekolah beserta jajaran guru menyambut baik kepedulian mahasiswa dalam mengawal digitalisasi ini
@@ -103,11 +103,11 @@ const fallbackArticles: Record<
     title: "Penerimaan Peserta Didik Baru (PPDB) Tahun Pelajaran 2026/2027",
     publishedAt: "2026-04-15T08:00:00.000Z",
     excerpt:
-      "SD Negeri Parang 5 Magetan membuka pendaftaran siswa baru untuk tahun ajaran baru. Persyaratan meliputi akta kelahiran anak, kartu keluarga, serta pengisian formulir fisik di kantor Tata Usaha.",
+      "SD Negeri Parang 5 Kediri membuka pendaftaran siswa baru untuk tahun ajaran baru. Persyaratan meliputi akta kelahiran anak, kartu keluarga, serta pengisian formulir fisik di kantor Tata Usaha.",
     bodyHtml: (
       <div className="prose max-w-none text-gray-700 leading-relaxed font-body flex flex-col gap-4">
         <p>
-          SD Negeri Parang 5 Magetan secara resmi membuka pendaftaran Penerimaan Peserta Didik Baru (PPDB)
+          SD Negeri Parang 5 Kediri secara resmi membuka pendaftaran Penerimaan Peserta Didik Baru (PPDB)
           untuk tahun ajaran 2026/2027. Sebagai salah satu sekolah dasar unggulan berkarakter di Kecamatan
           Parang, kami mengundang para orang tua wali murid untuk menitipkan pembinaan dasar putra-putrinya
           kepada kami.
@@ -140,7 +140,7 @@ const fallbackArticles: Record<
     bodyHtml: (
       <div className="prose max-w-none text-gray-700 leading-relaxed font-body flex flex-col gap-4">
         <p>
-          Suasana semarak dan khidmat mewarnai halaman upacara SD Negeri Parang 5 Magetan dalam perayaan
+          Suasana semarak dan khidmat mewarnai halaman upacara SD Negeri Parang 5 Kediri dalam perayaan
           Hari Pendidikan Nasional (Hardiknas) tahun 2026. Seluruh jajaran guru, staf tata usaha, komite
           sekolah, serta siswa-siswi kelas 1 s.d. 6 mengikuti jalannya upacara bendera dengan tertib.
         </p>

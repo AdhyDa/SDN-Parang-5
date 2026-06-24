@@ -13,7 +13,7 @@ export default async function Footer() {
 
   const address =
     contact?.address ||
-    "Jurang Kunci, RT 23/RW 07, Desa Parang, Kecamatan Parang, Kabupaten Magetan, Jawa Timur 63371";
+    "Jurang Kunci, RT 23/RW 07, Desa Parang, Kecamatan Parang, Kabupaten Kediri, Jawa Timur 63371";
   const phone = contact?.phone || "-";
   const email = contact?.email || "sdnparang5x@gmail.com";
 
@@ -105,12 +105,12 @@ export default async function Footer() {
       </div>
 
       {/* Copyright Bar */}
-      <div className="border-t border-white/10 py-6 text-center text-xs text-gray-400 font-body">
+      <div className="border-t border-white/10 py-6 text-center text-xs text-gray-400 md:text-gray-400 font-body">
         <div className="container-section flex flex-col sm:flex-row items-center justify-between gap-4">
           <span>
             © {new Date().getFullYear()} SDN Parang 5. Hak Cipta Dilindungi.
           </span>
-          <span className="text-gray-500">
+          <span className="text-gray-500 md:text-gray-400">
             Dikembangkan oleh Mahasiswa KKN Universitas Negeri Malang
           </span>
         </div>

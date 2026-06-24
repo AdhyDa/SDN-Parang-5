@@ -44,7 +44,7 @@ export default function NewsGalleryPreview({ news, gallery }: NewsGalleryPreview
             publishedAt: "2026-04-15T08:00:00.000Z",
             slug: { current: "ppdb-2026" },
             excerpt:
-              "Informasi lengkap pendaftaran siswa baru SDN Parang 5 Magetan. Hubungi panitia PPDB untuk koordinasi dokumen persyaratan masuk sekolah dasar.",
+              "Informasi lengkap pendaftaran siswa baru SDN Parang 5 Kediri. Hubungi panitia PPDB untuk koordinasi dokumen persyaratan masuk sekolah dasar.",
           },
           {
             _id: "demo-n3",

@@ -80,7 +80,7 @@ export default async function GuruPage() {
               Tim Pendidik & Tenaga Kependidikan
             </h2>
             <p className="text-gray-500 font-body text-sm md:text-base leading-relaxed">
-              Bertemu dengan guru-guru hebat dan berdedikasi tinggi di SDN Parang 5 Magetan yang siap membina
+              Bertemu dengan guru-guru hebat dan berdedikasi tinggi di SDN Parang 5 Kediri yang siap membina
               serta mengantarkan putra-putri Anda menuju prestasi cemerlang.
             </p>
           </div>
@@ -88,7 +88,7 @@ export default async function GuruPage() {
 
         {/* Directory Grid */}
         <section className="pb-16 md:pb-24">
-          <div className="container-section grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+          <div className="container-section grid grid-cols-2 md:grid-cols-4 gap-6">
             {displayedTeachers.map((teacher) => (
               <div
                 key={teacher._id}

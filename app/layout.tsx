@@ -18,7 +18,7 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: "SDN Parang 5 — Sekolah Dasar Negeri Unggulan",
+    default: "SDN Parang 5 — Home",
     template: "%s | SDN Parang 5",
   },
   description:
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     "sekolah unggulan",
   ],
   openGraph: {
-    title: "SDN Parang 5 — Sekolah Dasar Negeri Unggulan",
+    title: "SDN Parang 5 — Home",
     description:
       "Website resmi SDN Parang 5. Sekolah dasar negeri dengan program unggulan pembentukan karakter.",
     type: "website",

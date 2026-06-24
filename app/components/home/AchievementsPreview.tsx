@@ -30,7 +30,7 @@ export default function AchievementsPreview({ achievements }: AchievementsPrevie
           },
           {
             _id: "demo-2",
-            title: "Finalis Lomba Bertutur SD/MI Tingkat Kabupaten Magetan",
+            title: "Finalis Lomba Bertutur SD/MI Tingkat Kabupaten Kediri",
             winner: "Siswa Berbakat SDN Parang 5",
             date: "2026-06-02",
           },

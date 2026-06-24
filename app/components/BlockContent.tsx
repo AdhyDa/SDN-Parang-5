@@ -1,5 +1,6 @@
 import React from "react";
 import { urlFor } from "@/sanity/lib/image";
+import Image from "next/image";
 
 interface BlockChild {
   _key: string;
@@ -139,11 +140,13 @@ export default function BlockContent({ blocks }: BlockContentProps) {
         try {
           const imageUrl = urlFor(block).width(800).url();
           renderedBlocks.push(
-            <div key={block._key || index} className="my-6">
-              <img
+            <div key={block._key || index} className="relative w-full aspect-video md:aspect-[16/9] rounded-xl overflow-hidden shadow-sm my-6 bg-gray-50">
+              <Image
                 src={imageUrl}
                 alt={block.alt || "Dokumentasi SDN Parang 5"}
-                className="rounded-xl object-cover w-full max-h-[500px] shadow-sm"
+                fill
+                className="object-cover"
+                sizes="(max-w-768px) 100vw, 800px"
               />
               {block.alt && (
                 <p className="text-xs text-center text-gray-500 mt-2 italic font-body">

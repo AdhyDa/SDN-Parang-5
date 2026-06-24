@@ -40,49 +40,51 @@ export default function Header() {
     <header
       className={`sticky top-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-white/95 backdrop-blur-md shadow-md py-3"
-          : "bg-white py-4 border-b border-gray-100"
+          ? "bg-white/85 backdrop-blur-md border-b border-gray-200/40 shadow-sm py-3"
+          : "bg-white/60 backdrop-blur-md border-b border-gray-100/20 py-4"
       }`}
     >
       <div className="container-section flex items-center justify-between">
         {/* Logo and branding */}
         <Link href="/" className="flex items-center gap-3 group">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-navy to-sky flex items-center justify-center text-white font-extrabold text-lg shadow-md group-hover:scale-105 transition-transform">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-navy to-sky flex items-center justify-center text-white font-extrabold text-lg shadow-md group-hover:scale-105 transition-transform duration-300">
             P5
           </div>
           <div className="flex flex-col">
-            <span className="font-heading font-extrabold text-navy tracking-tight text-base sm:text-lg leading-none">
+            <span className="font-heading font-extrabold text-navy group-hover:text-navy-light transition-colors duration-300 tracking-tight text-base sm:text-lg leading-none">
               SDN Parang 5
             </span>
             <span className="text-[10px] text-gray-500 font-body font-medium mt-0.5 tracking-wider uppercase">
-              Magetan, Jawa Timur
+              Kediri, Jawa Timur
             </span>
           </div>
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center gap-1">
-          {navItems.map((item) => {
-            const isActive =
-              pathname === item.href ||
-              (item.href !== "/" && pathname?.startsWith(item.href));
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`font-heading font-semibold text-sm px-4 py-2 rounded-full transition-all duration-300 ${
-                  isActive
-                    ? "bg-navy text-white shadow-sm"
-                    : "text-gray-600 hover:text-navy hover:bg-light"
-                }`}
-              >
-                {item.label}
-              </Link>
-            );
-          })}
+        <nav className="hidden lg:flex items-center gap-8">
+          <div className="flex items-center gap-6">
+            {navItems.map((item) => {
+              const isActive =
+                pathname === item.href ||
+                (item.href !== "/" && pathname?.startsWith(item.href));
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`font-heading text-sm py-1 px-0.5 relative transition-colors duration-300 ${
+                    isActive
+                      ? "text-navy font-bold after:scale-x-100"
+                      : "text-gray-600 hover:text-navy font-medium after:scale-x-0"
+                  } after:content-[''] after:absolute after:-bottom-1 after:left-0 after:right-0 after:h-[2.5px] after:bg-amber after:rounded-full hover:after:scale-x-100 after:origin-left after:transition-transform after:duration-300`}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
+          </div>
           <Link
             href="/kontak"
-            className="ml-2 bg-amber text-gray-900 font-heading font-bold text-xs px-5 py-2.5 rounded-full transition-all hover:bg-amber-dark hover:shadow-lg hover:shadow-amber/20 hover:-translate-y-0.5"
+            className="bg-amber text-gray-900 font-heading font-bold text-xs px-5 py-2.5 rounded-full transition-all duration-300 hover:bg-amber-dark hover:shadow-lg hover:shadow-amber/20 hover:-translate-y-0.5"
           >
             Hubungi Kami
           </Link>

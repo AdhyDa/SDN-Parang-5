@@ -17,5 +17,5 @@ export default async function GaleriPage() {
 }
 export const metadata = {
   title: "Galeri Kegiatan",
-  description: "Album dokumentasi kegiatan belajar mengajar, sarana prasarana, dan prestasi siswa di SD Negeri Parang 5 Magetan.",
+  description: "Album dokumentasi kegiatan belajar mengajar, sarana prasarana, dan prestasi siswa di SD Negeri Parang 5 Kediri.",
 };
