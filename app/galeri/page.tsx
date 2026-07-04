@@ -2,6 +2,7 @@ import React from "react";
 import { client } from "@/sanity/lib/client";
 import { allGalleryQuery } from "@/sanity/lib/queries";
 import GalleryClient from "../components/home/GalleryClient";
+import Footer from "../components/Footer";
 
 export const revalidate = 60;
 
@@ -13,7 +14,12 @@ export default async function GaleriPage() {
     console.error("Error fetching gallery photos from Sanity:", error);
   }
 
-  return <GalleryClient gallery={gallery || []} />;
+  return (
+    <>
+      <GalleryClient gallery={gallery || []} />
+      <Footer />
+    </>
+  );
 }
 export const metadata = {
   title: "Galeri Kegiatan",

@@ -82,12 +82,6 @@ export default function Header() {
               );
             })}
           </div>
-          <Link
-            href="/kontak"
-            className="bg-amber text-gray-900 font-heading font-bold text-xs px-5 py-2.5 rounded-full transition-all duration-300 hover:bg-amber-dark hover:shadow-lg hover:shadow-amber/20 hover:-translate-y-0.5"
-          >
-            Hubungi Kami
-          </Link>
         </nav>
 
         {/* Mobile menu trigger */}

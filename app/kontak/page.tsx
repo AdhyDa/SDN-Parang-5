@@ -17,9 +17,9 @@ export default async function KontakPage() {
 
   const address =
     contact?.address ||
-    "Jurang Kunci, RT 23/RW 07, Desa Parang, Kecamatan Parang, Kabupaten Kediri, Jawa Timur 63371";
+    "Dsn. Bulakdawung, Desa Parang, Kecamatan Banyakan, Kabupaten Kediri, Jawa Timur";
   const phone = contact?.phone || "-";
-  const email = contact?.email || "sdnparang5x@gmail.com";
+  const email = contact?.email || "sdn.parang.v@gmail.com";
 
   // Clean WhatsApp number
   const waCleanNumber = phone.replace(/[^0-9]/g, "");
@@ -167,7 +167,7 @@ export default async function KontakPage() {
                 Identitas Sekolah
               </span>
               <p className="text-gray-600 font-body text-xs md:text-sm mt-1 leading-relaxed">
-                NPSN: 20509284
+                NPSN: 20554546
                 <br />
                 Status: Sekolah Dasar Negeri (SDN)
               </p>

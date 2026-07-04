@@ -20,7 +20,7 @@ export default function HeroSection({ data }: HeroSectionProps) {
     "Selamat datang di website resmi SD Negeri Parang 5 Kediri. Kami berkomitmen menyelenggarakan pendidikan berkualitas ramah anak demi mendukung pertumbuhan karakter unggul sejak dini.";
 
   return (
-    <section className="relative overflow-hidden bg-white py-12 md:py-24">
+    <section className="relative overflow-hidden bg-white py-4 md:py-8">
       {/* Decorative backdrop blobs */}
       <div className="absolute top-0 left-0 w-72 h-72 bg-sky/10 rounded-full blur-3xl -translate-x-12 -translate-y-12" />
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-amber/10 rounded-full blur-3xl translate-x-20 translate-y-20" />

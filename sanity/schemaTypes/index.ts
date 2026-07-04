@@ -9,6 +9,7 @@ import {teacherType} from './teacherType'
 import {achievementType} from './achievementType'
 import {galleryType} from './galleryType'
 import {newsType} from './newsType'
+import {accessSettingsType} from './accessSettingsType'
 
 export const schema: {types: SchemaTypeDefinition[]} = {
   types: [
@@ -21,5 +22,6 @@ export const schema: {types: SchemaTypeDefinition[]} = {
     achievementType,
     galleryType,
     newsType,
+    accessSettingsType,
   ],
 }

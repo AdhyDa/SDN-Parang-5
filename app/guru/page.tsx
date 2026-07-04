@@ -18,50 +18,86 @@ interface Teacher {
 }
 
 export default async function GuruPage() {
+  // Ubah ke true jika ingin menggunakan data dari Sanity CMS.
+  // Saat ini diatur ke false agar menggunakan data lokal yang Anda perbarui di bawah.
+  const useSanityCMS = false;
+
   let teachers: Teacher[] = [];
-  try {
-    teachers = await client.fetch(teachersQuery);
-  } catch (error) {
-    console.error("Error fetching teachers data from Sanity CMS:", error);
+  if (useSanityCMS) {
+    try {
+      teachers = await client.fetch(teachersQuery);
+    } catch (error) {
+      console.error("Error fetching teachers data from Sanity CMS:", error);
+    }
   }
 
-  // Fallback personnel if CMS is empty
-  const displayedTeachers =
-    teachers.length > 0
-      ? teachers
-      : [
-          {
-            _id: "t1",
-            name: "Samiran, S.Pd.",
-            role: "Kepala Sekolah",
-            nip: "196XXXXXXXXXXXXXXX",
-          },
-          {
-            _id: "t2",
-            name: "Agus Rianto",
-            role: "Operator Sekolah / Tata Usaha",
-          },
-          {
-            _id: "t3",
-            name: "Guru SDN Parang 5",
-            role: "Guru Kelas (Rumpun Awal)",
-          },
-          {
-            _id: "t4",
-            name: "Guru SDN Parang 5",
-            role: "Guru Kelas (Rumpun Tengah)",
-          },
-          {
-            _id: "t5",
-            name: "Guru SDN Parang 5",
-            role: "Guru Kelas (Rumpun Atas)",
-          },
-          {
-            _id: "t6",
-            name: "Guru PJOK",
-            role: "Guru Pendidikan Jasmani & Kesehatan",
-          },
-        ];
+  const localTeachers = [
+    {
+      _id: "t1",
+      name: "Samiran, S.Pd.",
+      role: "Kepala Sekolah",
+      nip: "-",
+      photo: "/images/principal-fallback.png",
+    },
+    {
+      _id: "t2",
+      name: "Bagus Heri Setiawan",
+      role: "Guru Kelas 1",
+      nip: "19860919202511113",
+      photo: "/images/bagus.png",
+    },
+    {
+      _id: "t3",
+      name: "Yuningsih",
+      role: "Guru Kelas 2",
+      nip: "-",
+      photo: "/images/yuningsih.png",
+    },
+    {
+      _id: "t4",
+      name: "Lina Rahayuningsih, S.Pd.SD",
+      role: "Guru Kelas 3",
+      nip: "198602252019032004",
+      photo: "/images/lina.png",
+    },
+    {
+      _id: "t5",
+      name: "Erma Oktaviani Misita Putri, S.Pd.",
+      role: "Guru Kelas 4",
+      nip: "199610052020122014",
+      photo: "/images/erma.png",
+    },
+    {
+      _id: "t6",
+      name: "Erna Sri Choirin, S.Pd.",
+      role: "Guru Kelas 5",
+      nip: "198504192020122003",
+      photo: "/images/erna.png",
+    },
+    {
+      _id: "t7",
+      name: "Dana Sulistiyo Basuki, S.Pd.",
+      role: "Guru Kelas 6",
+      nip: "198405252023211013",
+      photo: "/images/dana.png",
+    },
+    {
+      _id: "t8",
+      name: "Sylvina Dwi Nugrahawati, S.Pd.",
+      role: "Guru Mapel PAI",
+      nip: "199609112025212104",
+      photo: "/images/sylvina.png",
+    },
+    {
+      _id: "t9",
+      name: "Mulyono, S.Pd.",
+      role: "Guru Mapel PJOK",
+      nip: "197503102010011014",
+      photo: "/images/mulyono.png",
+    },
+  ];
+
+  const displayedTeachers = useSanityCMS && teachers.length > 0 ? teachers : localTeachers;
 
   return (
     <>
@@ -98,7 +134,7 @@ export default async function GuruPage() {
                 <div className="relative w-full aspect-[3/4] overflow-hidden bg-gray-50 flex-shrink-0">
                   {teacher.photo ? (
                     <Image
-                      src={urlFor(teacher.photo).width(400).height(533).url()}
+                      src={typeof teacher.photo === 'string' ? teacher.photo : urlFor(teacher.photo).width(400).height(533).url()}
                       alt={`Foto Guru ${teacher.name}`}
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-500"
@@ -130,7 +166,7 @@ export default async function GuruPage() {
                   )}
                 </div>
               </div>
-            ))}
+            ))} 
           </div>
         </section>
       </main>

@@ -18,17 +18,16 @@ export default async function ProfilPage() {
     console.error("Error fetching profil data from Sanity CMS:", error);
   }
 
-  // Vision / Mission fallback text
   const vision =
     profilData?.vision ||
-    "Terwujudnya peserta didik yang beriman, cerdas, kreatif, berkarakter mulia, dan peduli lingkungan berlandaskan nilai kearifan lokal.";
+    "Membina akhlak meraih prestasi, berwawasan global, yang dilandasi nilai-nilai budaya luhur sesuai ajaran agama.";
   
   const mission = profilData?.mission || [
-    "Menanamkan keimanan dan ketakwaan melalui pengamalan ajaran agama secara nyata.",
-    "Mengoptimalkan proses pembelajaran yang aktif, kreatif, inovatif, menyenangkan, dan berpusat pada siswa.",
-    "Membentuk karakter siswa yang disiplin, jujur, santun, bertanggung jawab, dan peduli sesama.",
-    "Mengembangkan potensi minat dan bakat siswa di bidang akademik dan non-akademik.",
-    "Menciptakan lingkungan sekolah yang bersih, sehat, rindang, dan ramah anak.",
+    "Menanamkan keyakinan/akidah melalui pengajaran agama.",
+    "Mengoptimalkan proses pembelajaran dan bimbingan.",
+    "Menggunakan metode pembelajaran yang inovatif berbasis proyek dan pemanfaatan teknologi.",
+    "Menciptakan komunikasi yang efektif antara guru dengan siswa, serta guru dengan orang tua.",
+    "Memberikan pendampingan terhadap bakat dan minat yang dimiliki peserta didik.",
   ];
 
   return (
@@ -55,7 +54,7 @@ export default async function ProfilPage() {
                 <div className="prose max-w-none text-gray-600 font-body leading-relaxed flex flex-col gap-4 text-justify">
                   <p>
                     SD Negeri Parang 5 didirikan secara resmi pada tanggal <strong>7 Juni 1988</strong> di
-                    dusun Jurang Kunci, Desa Parang, Kecamatan Parang, Kabupaten Kediri, Provinsi Jawa
+                    dusun Bulakdawung, Desa Parang, Kecamatan Banyakan, Kabupaten Kediri, Provinsi Jawa
                     Timur. Pendirian sekolah ini dilatarbelakangi oleh tingginya kebutuhan masyarakat Desa
                     Parang akan akses pendidikan dasar yang dekat, berkualitas, dan terjangkau bagi
                     anak-anak mereka.

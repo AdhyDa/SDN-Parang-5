@@ -4,6 +4,7 @@ import {
   HomeIcon,
   DocumentTextIcon,
   EnvelopeIcon,
+  LockIcon,
 } from '@sanity/icons'
 
 /**
@@ -11,34 +12,42 @@ import {
  * Dikelompokkan menjadi: Pengaturan Umum, Halaman, dan Data Dinamis.
  */
 export const structure: StructureResolver = (S) =>
-  S.list()
-    .title('SDN Parang 5 - Admin Panel')
-    .items([
-      // ── Pengaturan Umum ──
-      S.listItem()
-        .title('⚙️ Pengaturan Umum')
-        .child(
-          S.list()
-            .title('Pengaturan Umum')
-            .items([
-              S.listItem()
-                .title('Pengaturan Website')
-                .icon(CogIcon)
-                .child(
-                  S.document()
-                    .schemaType('siteSettings')
-                    .documentId('siteSettings'),
-                ),
-              S.listItem()
-                .title('Informasi Kontak')
-                .icon(EnvelopeIcon)
-                .child(
-                  S.document()
-                    .schemaType('schoolContact')
-                    .documentId('schoolContact'),
-                ),
-            ]),
-        ),
+ S.list()
+   .title('SDN Parang 5 - Admin Panel')
+   .items([
+     // ── Pengaturan Umum ──
+     S.listItem()
+       .title('⚙️ Pengaturan Umum')
+       .child(
+         S.list()
+           .title('Pengaturan Umum')
+           .items([
+             S.listItem()
+               .title('Pengaturan Website')
+               .icon(CogIcon)
+               .child(
+                 S.document()
+                   .schemaType('siteSettings')
+                   .documentId('siteSettings'),
+               ),
+             S.listItem()
+               .title('Informasi Kontak')
+               .icon(EnvelopeIcon)
+               .child(
+                 S.document()
+                   .schemaType('schoolContact')
+                   .documentId('schoolContact'),
+               ),
+             S.listItem()
+               .title('Kata Sandi Akses Studio')
+               .icon(LockIcon)
+               .child(
+                 S.document()
+                   .schemaType('accessSettings')
+                   .documentId('accessSettings'),
+               ),
+           ]),
+       ),
 
       S.divider(),
 

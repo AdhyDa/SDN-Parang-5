@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
 import Header from "@/app/components/Header";
-import Footer from "@/app/components/Footer";
 import PageBanner from "@/app/components/PageBanner";
 
 interface GalleryItem {
@@ -212,7 +211,6 @@ export default function GalleryClient({ gallery }: GalleryClientProps) {
           </div>
         )}
       </main>
-      <Footer />
     </>
   );
 }
