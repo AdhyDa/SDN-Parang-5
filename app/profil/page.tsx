@@ -20,15 +20,22 @@ export default async function ProfilPage() {
 
   const vision =
     profilData?.vision ||
-    "Membina akhlak meraih prestasi, berwawasan global, yang dilandasi nilai-nilai budaya luhur sesuai ajaran agama.";
+    "Membina Akhlak Meraih Prestasi, Berwawasan Global, Yang ditandai Nilai-nilai Budaya Luhur sesuai Ajaran Agama";
   
   const mission = profilData?.mission || [
-    "Menanamkan keyakinan/akidah melalui pengajaran agama.",
-    "Mengoptimalkan proses pembelajaran dan bimbingan.",
-    "Menggunakan metode pembelajaran yang inovatif berbasis proyek dan pemanfaatan teknologi.",
-    "Menciptakan komunikasi yang efektif antara guru dengan siswa, serta guru dengan orang tua.",
-    "Memberikan pendampingan terhadap bakat dan minat yang dimiliki peserta didik.",
+    "Menanamkan keyakinan/akidah melalui pengamalan ajaran agama",
+    "Mengoptimalkan Proses Pembelajaran dan Bimbingan"
   ];
+
+  const submission1 = profilData?.submission1 || [
+    "Peserta didik membiasakan diri untuk berdoa sebelum melaksanakan kegiatan pembelajaran, sholat dhuha setiap hari jum'at dan memperingati hari-hari besar keagamaan dengan khidmat.",
+    "Peserta didik menunjukkan kepedulian sosial sesuai ajaran agamanya, melalui tindakan nyata seperti aksi berbagi saat kegiatan santunan anak yatim, menjaga kebersihan lingkungan sekolah tetap asri dengan melaksanakan program penghijauan bersama"
+  ];
+
+  const submission2 = profilData?.submission2 || [
+    "Meningkatkan dan memfasilitasi kegiatan peningkatan kompetensi guru melalui berbagai kegiatan workshop, seminar, dan pengimbasan.",
+    "Menggunakan metode pembelajaran yang inovatif berbasis proyek dan pemanfaatan teknologi"
+  ]
 
   return (
     <>
@@ -107,7 +114,23 @@ export default async function ProfilPage() {
                       <span className="flex-shrink-0 w-8 h-8 rounded-full bg-amber text-gray-900 font-heading font-extrabold text-sm flex items-center justify-center shadow-sm">
                         {idx + 1}
                       </span>
-                      <span className="mt-1 leading-relaxed">{item}</span>
+                      <div className="mt-1 leading-relaxed">
+                        {item}
+                        {idx === 0 && (
+                          <ul className="list-disc pl-5 mt-2 text-gray-600">
+                            {submission1.map((subItem: string, subIdx: number) => (
+                              <li key={subIdx}>{subItem}</li>
+                            ))}
+                          </ul>
+                        )}
+                        {idx === 1 && (
+                          <ul className="list-disc pl-5 mt-2 text-gray-600">
+                            {submission2.map((subItem: string, subIdx: number) => (
+                              <li key={subIdx}>{subItem}</li>
+                            ))}
+                          </ul>
+                        )}
+                      </div>
                     </li>
                   ))}
                 </ol>
