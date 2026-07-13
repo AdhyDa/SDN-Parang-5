@@ -19,6 +19,21 @@ export default defineConfig({
   dataset,
   // Add and edit the content schema in the './sanity/schemaTypes' folder
   schema,
+  document: {
+    // For singleton types, filter out actions that are not edit/publish/discard
+    actions: (input, context) => {
+      const singletonTypes = new Set(['siteSettings', 'schoolContact', 'pageHome', 'pageProfil', 'accessSettings'])
+      if (singletonTypes.has(context.schemaType)) {
+        return input.filter(({ action }) => action && ['publish', 'discardChanges', 'restore'].includes(action))
+      }
+      return input
+    },
+    // Filter out singleton types from new document templates
+    newDocumentOptions: (prev) => {
+      const singletonTypes = new Set(['siteSettings', 'schoolContact', 'pageHome', 'pageProfil', 'accessSettings'])
+      return prev.filter((item) => !singletonTypes.has(item.templateId))
+    }
+  },
   plugins: [
     structureTool({structure}),
     // Vision is for querying with GROQ from inside the Studio
