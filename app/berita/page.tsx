@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { client } from "@/sanity/lib/client";
-import { allNewsQuery } from "@/sanity/lib/queries";
+import { allNewsQuery, pageNewsQuery } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -21,8 +21,14 @@ interface NewsItem {
 
 export default async function BeritaPage() {
   let news: NewsItem[] = [];
+  let newsIntro = null;
   try {
-    news = await client.fetch(allNewsQuery);
+    const [newsRes, introRes] = await Promise.all([
+      client.fetch(allNewsQuery),
+      client.fetch(pageNewsQuery)
+    ]);
+    news = newsRes || [];
+    newsIntro = introRes;
   } catch (error) {
     console.error("Error fetching news from Sanity CMS:", error);
   }
@@ -63,20 +69,22 @@ export default async function BeritaPage() {
       <Header />
       <main className="flex-1 bg-white">
         {/* Page Banner */}
-        <PageBanner title="Berita & Artikel" breadcrumbCurrent="Berita" />
+        <PageBanner 
+          title={newsIntro?.bannerTitle || "Berita & Artikel"} 
+          breadcrumbCurrent={newsIntro?.breadcrumbCurrent || "Berita"} 
+        />
 
         {/* Kabar Intro */}
         <section className="pt-12 pb-6">
           <div className="container-section text-center max-w-xl">
             <span className="font-heading font-extrabold text-xs uppercase tracking-widest text-amber mb-2 block">
-              Kabar Sekolah
+              {newsIntro?.introBadge || "Kabar Sekolah"}
             </span>
             <h2 className="text-2xl md:text-3xl font-extrabold font-heading text-navy mb-4">
-              Kabar Terbaru & Pengumuman Resmi
+              {newsIntro?.introTitle || "Kabar Terbaru & Pengumuman Resmi"}
             </h2>
             <p className="text-gray-500 font-body text-sm leading-relaxed">
-              Ikuti kabar kegiatan pembelajaran terbaru, info pengumuman akademik, PPDB, agenda kerja
-              bakti, serta liputan prestasi siswa-siswi SDN Parang 5.
+              {newsIntro?.introDescription || "Ikuti kabar kegiatan pembelajaran terbaru, info pengumuman akademik, PPDB, agenda kerja bakti, serta liputan prestasi siswa-siswi SDN Parang 5."}
             </p>
           </div>
         </section>
@@ -96,7 +104,7 @@ export default async function BeritaPage() {
                   return (
                     <div className="bg-white rounded-2xl overflow-hidden card-shadow border border-gray-100 p-5 md:p-6 group cursor-pointer flex flex-col gap-5 h-full">
                       {/* Landscape Image */}
-                      <div className="relative w-full aspect-video rounded-xl overflow-hidden bg-gray-50 flex-shrink-0">
+                      <div style={{ position: "relative" }} className="relative w-full aspect-video rounded-xl overflow-hidden bg-gray-50 flex-shrink-0">
                         {featured.mainImage ? (
                           <Image
                             src={urlFor(featured.mainImage).width(800).height(450).url()}
@@ -168,7 +176,7 @@ export default async function BeritaPage() {
                     className="bg-white rounded-xl card-shadow border border-gray-100/80 p-3 flex gap-4 items-start group cursor-pointer hover:border-amber/20 hover:-translate-y-0.5 transition-all duration-300"
                   >
                     {/* Small Square Thumbnail */}
-                    <div className="relative w-20 h-20 md:w-24 md:h-24 rounded-lg overflow-hidden bg-gray-50 flex-shrink-0">
+                    <div style={{ position: "relative" }} className="relative w-20 h-20 md:w-24 md:h-24 rounded-lg overflow-hidden bg-gray-50 flex-shrink-0">
                       {item.mainImage ? (
                         <Image
                           src={urlFor(item.mainImage).width(200).height(200).url()}

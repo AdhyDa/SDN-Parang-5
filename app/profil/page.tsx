@@ -19,20 +19,20 @@ export default async function ProfilPage() {
   }
 
   const vision =
-    profilData?.vision ||
+    profilData?.visiMisi?.vision ||
     "Membina Akhlak Meraih Prestasi, Berwawasan Global, Yang ditandai Nilai-nilai Budaya Luhur sesuai Ajaran Agama";
   
-  const mission = profilData?.mission || [
+  const mission = profilData?.visiMisi?.mission || [
     "Menanamkan keyakinan/akidah melalui pengamalan ajaran agama",
     "Mengoptimalkan Proses Pembelajaran dan Bimbingan"
   ];
 
-  const submission1 = profilData?.submission1 || [
+  const submission1 = profilData?.visiMisi?.submission1 || [
     "Peserta didik membiasakan diri untuk berdoa sebelum melaksanakan kegiatan pembelajaran, sholat dhuha setiap hari jum'at dan memperingati hari-hari besar keagamaan dengan khidmat.",
     "Peserta didik menunjukkan kepedulian sosial sesuai ajaran agamanya, melalui tindakan nyata seperti aksi berbagi saat kegiatan santunan anak yatim, menjaga kebersihan lingkungan sekolah tetap asri dengan melaksanakan program penghijauan bersama"
   ];
 
-  const submission2 = profilData?.submission2 || [
+  const submission2 = profilData?.visiMisi?.submission2 || [
     "Meningkatkan dan memfasilitasi kegiatan peningkatan kompetensi guru melalui berbagai kegiatan workshop, seminar, dan pengimbasan.",
     "Menggunakan metode pembelajaran yang inovatif berbasis proyek dan pemanfaatan teknologi"
   ]
@@ -49,14 +49,14 @@ export default async function ProfilPage() {
           <div className="container-section">
             <div className="max-w-3xl mx-auto">
               <span className="font-heading font-extrabold text-xs uppercase tracking-wider text-amber mb-2 block">
-                Sejarah Singkat
+                {profilData?.history?.badge || "Sejarah Singkat"}
               </span>
               <h2 className="text-2xl md:text-3xl font-extrabold font-heading text-navy mb-6">
-                Perjalanan SDN Parang 5 Kediri
+                {profilData?.history?.title || "Perjalanan SDN Parang 5 Kediri"}
               </h2>
 
-              {profilData?.history ? (
-                <BlockContent blocks={profilData.history} />
+              {profilData?.history?.history ? (
+                <BlockContent blocks={profilData.history.history} />
               ) : (
                 <div className="prose max-w-none text-gray-600 font-body leading-relaxed flex flex-col gap-4 text-justify">
                   <p>
@@ -147,13 +147,13 @@ export default async function ProfilPage() {
                 Struktur Kepengurusan
               </span>
               <h2 className="text-2xl md:text-3xl font-extrabold font-heading text-navy mb-8">
-                Bagan Organisasi Sekolah
+                {profilData?.structure?.title || "Bagan Organisasi Sekolah"}
               </h2>
 
-              {profilData?.organizationStructure ? (
-                <div className="relative w-full aspect-video md:aspect-[16/9] rounded-2xl overflow-hidden shadow-md border border-gray-200">
+              {profilData?.structure?.organizationStructure ? (
+                <div style={{ position: "relative" }} className="relative w-full aspect-video md:aspect-[16/9] rounded-2xl overflow-hidden shadow-md border border-gray-200">
                   <Image
-                    src={urlFor(profilData.organizationStructure).width(1200).url()}
+                    src={urlFor(profilData.structure.organizationStructure).width(1200).url()}
                     alt="Bagan Organisasi SDN Parang 5"
                     fill
                     className="object-contain p-4 bg-white"
@@ -184,11 +184,11 @@ export default async function ProfilPage() {
                 Pembelajaran
               </span>
               <h2 className="text-2xl md:text-3xl font-extrabold font-heading text-navy mb-6">
-                Metode Belajar & Kurikulum
+                {profilData?.kurikulum?.title || "Metode Belajar & Kurikulum"}
               </h2>
 
-              {profilData?.pembelajaran ? (
-                <BlockContent blocks={profilData.pembelajaran} />
+              {profilData?.kurikulum?.pembelajaran ? (
+                <BlockContent blocks={profilData.kurikulum.pembelajaran} />
               ) : (
                 <div className="prose max-w-none text-gray-600 font-body leading-relaxed flex flex-col gap-4">
                   <p>
@@ -224,11 +224,11 @@ export default async function ProfilPage() {
                 Tata Kelola
               </span>
               <h2 className="text-2xl md:text-3xl font-extrabold font-heading text-navy mb-6">
-                Administrasi & Tata Kelola
+                {profilData?.tataKelola?.title || "Administrasi & Tata Kelola"}
               </h2>
 
-              {profilData?.tataKelola ? (
-                <BlockContent blocks={profilData.tataKelola} />
+              {profilData?.tataKelola?.tataKelola ? (
+                <BlockContent blocks={profilData.tataKelola.tataKelola} />
               ) : (
                 <div className="prose max-w-none text-gray-600 font-body leading-relaxed">
                   <p>

@@ -1,7 +1,21 @@
 import React from "react";
 import SectionHeading from "../SectionHeading";
 
-const programs = [
+interface ProgramItem {
+  icon: string;
+  title: string;
+  desc: string;
+}
+
+interface ProgramsSectionProps {
+  data?: {
+    title?: string;
+    subtitle?: string;
+    programs?: ProgramItem[];
+  } | null;
+}
+
+const defaultPrograms: ProgramItem[] = [
   {
     icon: "📚",
     title: "Program Literasi",
@@ -24,20 +38,24 @@ const programs = [
   },
 ];
 
-export default function ProgramsSection() {
+export default function ProgramsSection({ data }: ProgramsSectionProps) {
+  const sectionTitle = data?.title || "Program Unggulan Pembentukan Karakter";
+  const sectionSubtitle = data?.subtitle || "Nilai Unggul";
+  const programsList = data?.programs || defaultPrograms;
+
   return (
     <section id="program-unggulan" className="section-padding bg-white scroll-mt-20">
       <div className="container-section">
         {/* Section Title */}
         <SectionHeading
-          title="Program Unggulan Pembentukan Karakter"
-          subtitle="Nilai Unggul"
+          title={sectionTitle}
+          subtitle={sectionSubtitle}
           centered={true}
         />
 
         {/* Programs Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mt-8">
-          {programs.map((prog, idx) => (
+          {programsList.map((prog, idx) => (
             <div
               key={idx}
               className="p-6 md:p-8 bg-white rounded-2xl border border-gray-100/80 flex gap-5 md:gap-6 items-start shadow-sm hover:shadow-xl hover:shadow-navy/5 hover:border-amber/30 hover:-translate-y-1.5 transition-all duration-300 group cursor-pointer"

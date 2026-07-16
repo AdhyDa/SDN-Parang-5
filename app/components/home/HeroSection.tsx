@@ -58,7 +58,7 @@ export default function HeroSection({ data }: HeroSectionProps) {
             <div className="absolute inset-0 bg-amber rounded-3xl rotate-3 translate-x-[8px] translate-y-[8px] opacity-90 transition-transform duration-500 hover:rotate-[1deg]" />
             
             {/* Main Photo Card */}
-            <div className="relative w-full h-full rounded-3xl overflow-hidden shadow-2xl border-4 border-white group cursor-pointer z-10">
+            <div style={{ position: "relative" }} className="relative w-full h-full rounded-3xl overflow-hidden shadow-2xl border-4 border-white group cursor-pointer z-10">
               {data?.heroImage ? (
                 <Image
                   src={urlFor(data.heroImage).width(800).height(600).url()}

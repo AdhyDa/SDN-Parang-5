@@ -71,7 +71,7 @@ export default function AchievementsPreview({ achievements }: AchievementsPrevie
               className="bg-white rounded-2xl overflow-hidden card-shadow border border-gray-100 flex flex-col group h-full"
             >
               {/* Photo Area */}
-              <div className="relative w-full aspect-video overflow-hidden bg-gray-100 flex-shrink-0">
+              <div style={{ position: "relative" }} className="relative w-full aspect-video overflow-hidden bg-gray-100 flex-shrink-0">
                 {ach.image ? (
                   <Image
                     src={urlFor(ach.image).width(600).height(400).url()}

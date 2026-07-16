@@ -82,7 +82,7 @@ export default function NewsGalleryPreview({ news, gallery }: NewsGalleryPreview
                 className="flex gap-4 md:gap-6 items-start group hover:bg-light p-3 rounded-xl transition-all cursor-pointer border border-transparent hover:border-gray-100"
               >
                 {/* News Thumbnail */}
-                <div className="relative w-20 h-20 md:w-28 md:h-28 rounded-lg overflow-hidden bg-gray-100 flex-shrink-0">
+                <div style={{ position: "relative" }} className="relative w-20 h-20 md:w-28 md:h-28 rounded-lg overflow-hidden bg-gray-100 flex-shrink-0">
                   {item.mainImage ? (
                     <Image
                       src={urlFor(item.mainImage).width(200).height(200).url()}
@@ -144,6 +144,7 @@ export default function NewsGalleryPreview({ news, gallery }: NewsGalleryPreview
               {displayedGallery.map((item) => (
                 <div
                   key={item._id}
+                  style={{ position: "relative" }}
                   className="relative aspect-square rounded-xl overflow-hidden shadow-sm group hover:shadow-md hover:-translate-y-0.5 transition-all border border-gray-100 bg-gray-50"
                 >
                   <Image

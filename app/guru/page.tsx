@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import { client } from "@/sanity/lib/client";
-import { teachersQuery } from "@/sanity/lib/queries";
+import { teachersQuery, pageGuruQuery } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -18,17 +18,20 @@ interface Teacher {
 }
 
 export default async function GuruPage() {
-  // Ubah ke true jika ingin menggunakan data dari Sanity CMS.
-  // Saat ini diatur ke false agar menggunakan data lokal yang Anda perbarui di bawah.
-  const useSanityCMS = false;
+  const useSanityCMS = true;
 
   let teachers: Teacher[] = [];
-  if (useSanityCMS) {
-    try {
-      teachers = await client.fetch(teachersQuery);
-    } catch (error) {
-      console.error("Error fetching teachers data from Sanity CMS:", error);
-    }
+  let guruIntro = null;
+
+  try {
+    const [teachersRes, introRes] = await Promise.all([
+      client.fetch(teachersQuery),
+      client.fetch(pageGuruQuery)
+    ]);
+    teachers = teachersRes || [];
+    guruIntro = introRes;
+  } catch (error) {
+    console.error("Error fetching teachers data from Sanity CMS:", error);
   }
 
   const localTeachers = [
@@ -104,20 +107,22 @@ export default async function GuruPage() {
       <Header />
       <main className="flex-1 bg-white">
         {/* Page Title & Breadcrumbs Banner */}
-        <PageBanner title="Guru & Tenaga Kependidikan" breadcrumbCurrent="Guru" />
+        <PageBanner 
+          title={guruIntro?.bannerTitle || "Guru & Tenaga Kependidikan"} 
+          breadcrumbCurrent={guruIntro?.breadcrumbCurrent || "Guru"} 
+        />
 
         {/* Directory Intro Section */}
         <section className="pt-12 pb-6">
           <div className="container-section text-center max-w-2xl">
             <span className="font-heading font-extrabold text-xs uppercase tracking-widest text-amber mb-2 block">
-              Pendidik Kami
+              {guruIntro?.introBadge || "Pendidik Kami"}
             </span>
             <h2 className="text-2xl md:text-3xl font-extrabold font-heading text-navy mb-4">
-              Tim Pendidik & Tenaga Kependidikan
+              {guruIntro?.introTitle || "Tim Pendidik & Tenaga Kependidikan"}
             </h2>
             <p className="text-gray-500 font-body text-sm md:text-base leading-relaxed">
-              Bertemu dengan guru-guru hebat dan berdedikasi tinggi di SDN Parang 5 Kediri yang siap membina
-              serta mengantarkan putra-putri Anda menuju prestasi cemerlang.
+              {guruIntro?.introDescription || "Bertemu dengan guru-guru hebat dan berdedikasi tinggi di SDN Parang 5 Kediri yang siap membina serta mengantarkan putra-putri Anda menuju prestasi cemerlang."}
             </p>
           </div>
         </section>
@@ -131,7 +136,7 @@ export default async function GuruPage() {
                 className="bg-white rounded-2xl overflow-hidden card-shadow border border-gray-100 flex flex-col group"
               >
                 {/* Photo container */}
-                <div className="relative w-full aspect-[3/4] overflow-hidden bg-gray-50 flex-shrink-0">
+                <div style={{ position: "relative" }} className="relative w-full aspect-[3/4] overflow-hidden bg-gray-50 flex-shrink-0">
                   {teacher.photo ? (
                     <Image
                       src={typeof teacher.photo === 'string' ? teacher.photo : urlFor(teacher.photo).width(400).height(533).url()}

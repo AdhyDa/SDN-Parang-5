@@ -22,7 +22,24 @@ export default defineConfig({
   document: {
     // For singleton types, filter out actions that are not edit/publish/discard
     actions: (input, context) => {
-      const singletonTypes = new Set(['siteSettings', 'schoolContact', 'pageHome', 'pageProfil', 'accessSettings'])
+      const singletonTypes = new Set([
+        'siteSettings',
+        'schoolContact',
+        'accessSettings',
+        'homeHero',
+        'homeWelcome',
+        'homeStats',
+        'homePrograms',
+        'profilHistory',
+        'profilVisiMisi',
+        'profilStructure',
+        'profilKurikulum',
+        'profilTataKelola',
+        'pageGuru',
+        'pageGallery',
+        'pageNews',
+        'pageContact'
+      ])
       if (singletonTypes.has(context.schemaType)) {
         return input.filter(({ action }) => action && ['publish', 'discardChanges', 'restore'].includes(action))
       }
@@ -30,7 +47,24 @@ export default defineConfig({
     },
     // Filter out singleton types from new document templates
     newDocumentOptions: (prev) => {
-      const singletonTypes = new Set(['siteSettings', 'schoolContact', 'pageHome', 'pageProfil', 'accessSettings'])
+      const singletonTypes = new Set([
+        'siteSettings',
+        'schoolContact',
+        'accessSettings',
+        'homeHero',
+        'homeWelcome',
+        'homeStats',
+        'homePrograms',
+        'profilHistory',
+        'profilVisiMisi',
+        'profilStructure',
+        'profilKurikulum',
+        'profilTataKelola',
+        'pageGuru',
+        'pageGallery',
+        'pageNews',
+        'pageContact'
+      ])
       return prev.filter((item) => !singletonTypes.has(item.templateId))
     }
   },

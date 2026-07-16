@@ -55,13 +55,13 @@ export default async function HomePage() {
 
       {/* Main Sections */}
       <main className="flex-1">
-        <HeroSection data={homeData} />
+        <HeroSection data={homeData?.hero} />
         
-        <WelcomeSection data={homeData} />
+        <WelcomeSection data={homeData?.welcome} />
         
-        <StatsSection data={homeData} />
+        <StatsSection data={homeData?.stats} />
         
-        <ProgramsSection />
+        <ProgramsSection data={homeData?.programs} />
         
         <AchievementsPreview achievements={achievements} />
         

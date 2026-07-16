@@ -220,7 +220,7 @@ export default async function DetailBeritaPage({
 
             {/* Article Main Cover Photo */}
             {image && (
-              <div className="relative w-full aspect-video rounded-2xl overflow-hidden shadow-sm border border-gray-200 mb-8 bg-gray-50">
+              <div style={{ position: "relative" }} className="relative w-full aspect-video rounded-2xl overflow-hidden shadow-sm border border-gray-200 mb-8 bg-gray-50">
                 <Image
                   src={urlFor(image).width(800).height(450).url()}
                   alt={title}

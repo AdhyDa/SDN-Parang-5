@@ -140,7 +140,7 @@ export default function BlockContent({ blocks }: BlockContentProps) {
         try {
           const imageUrl = urlFor(block).width(800).url();
           renderedBlocks.push(
-            <div key={block._key || index} className="relative w-full aspect-video md:aspect-[16/9] rounded-xl overflow-hidden shadow-sm my-6 bg-gray-50">
+            <div key={block._key || index} style={{ position: "relative" }} className="relative w-full aspect-video md:aspect-[16/9] rounded-xl overflow-hidden shadow-sm my-6 bg-gray-50">
               <Image
                 src={imageUrl}
                 alt={block.alt || "Dokumentasi SDN Parang 5"}

@@ -11,7 +11,7 @@ interface WelcomeSectionProps {
 }
 
 export default function WelcomeSection({ data }: WelcomeSectionProps) {
-  const name = data?.principalName || "Samiran, S.Pd.";
+  const name = data?.principalName || "Iftakhul Kusniah,S.Pd";
   const welcome =
     data?.principalWelcome ||
     "Selamat datang di SD Negeri Parang 5 Kediri. Kami bertekad untuk menyelenggarakan pendidikan dasar yang ramah anak, kreatif, dan inklusif. Di SDN Parang 5, setiap anak dibina dengan penuh kehangatan agar potensi akademik maupun kepribadian mulianya berkembang optimal sesuai bakatnya. Semoga website ini mempermudah koordinasi, transparansi, serta mengukuhkan jalinan erat antara sekolah, wali murid, dan masyarakat.";
@@ -21,7 +21,7 @@ export default function WelcomeSection({ data }: WelcomeSectionProps) {
       <div className="container-section grid grid-cols-1 lg:grid-cols-12 gap-10 md:gap-16 items-center">
         {/* Left Column: Photo */}
         <div className="lg:col-span-4 flex flex-col items-center">
-          <div className="relative w-64 h-80 rounded-2xl overflow-hidden shadow-2xl border-4 border-white rotate-2 hover:rotate-0 transition-transform duration-300 group">
+          <div style={{ position: "relative" }} className="relative w-64 h-80 rounded-2xl overflow-hidden shadow-2xl border-4 border-white rotate-2 hover:rotate-0 transition-transform duration-300 group">
             {data?.principalPhoto ? (
               <Image
                 src={urlFor(data.principalPhoto).width(400).height(500).url()}
@@ -32,7 +32,7 @@ export default function WelcomeSection({ data }: WelcomeSectionProps) {
               />
             ) : (
               <Image
-                src="/images/principal-fallback.png"
+                src="/images/iftakhul.png"
                 alt={`Kepala Sekolah ${name}`}
                 fill
                 className="object-cover"

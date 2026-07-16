@@ -15,6 +15,13 @@ interface GalleryItem {
 
 interface GalleryClientProps {
   gallery: GalleryItem[];
+  intro?: {
+    bannerTitle?: string;
+    breadcrumbCurrent?: string;
+    introBadge?: string;
+    introTitle?: string;
+    introDescription?: string;
+  } | null;
 }
 
 const categories = [
@@ -24,7 +31,7 @@ const categories = [
   { label: "Fasilitas & Lingkungan", value: "fasilitas" },
 ];
 
-export default function GalleryClient({ gallery }: GalleryClientProps) {
+export default function GalleryClient({ gallery, intro }: GalleryClientProps) {
   const [activeCategory, setActiveCategory] = useState("all");
   const [selectedPhoto, setSelectedPhoto] = useState<GalleryItem | null>(null);
 
@@ -82,21 +89,23 @@ export default function GalleryClient({ gallery }: GalleryClientProps) {
       <Header />
       <main className="flex-1 bg-white">
         {/* Page Banner */}
-        <PageBanner title="Galeri Dokumentasi" breadcrumbCurrent="Galeri" />
+        <PageBanner 
+          title={intro?.bannerTitle || "Galeri Dokumentasi"} 
+          breadcrumbCurrent={intro?.breadcrumbCurrent || "Galeri"} 
+        />
 
         {/* Filter Section */}
         <section className="pt-12 pb-6">
           <div className="container-section flex flex-col items-center gap-6">
             <div className="text-center max-w-xl">
               <span className="font-heading font-extrabold text-xs uppercase tracking-widest text-amber mb-2 block">
-                Visual Dokumentasi
+                {intro?.introBadge || "Visual Dokumentasi"}
               </span>
               <h2 className="text-2xl md:text-3xl font-extrabold font-heading text-navy mb-3">
-                Album Kegiatan & Fasilitas Sekolah
+                {intro?.introTitle || "Album Kegiatan & Fasilitas Sekolah"}
               </h2>
               <p className="text-gray-500 font-body text-sm leading-relaxed">
-                Dokumentasi foto kegiatan belajar mengajar, upacara bendera, prestasi perlombaan,
-                serta keasrian lingkungan sarana prasarana sekolah.
+                {intro?.introDescription || "Dokumentasi foto kegiatan belajar mengajar, upacara bendera, prestasi perlombaan, serta keasrian lingkungan sarana prasarana sekolah."}
               </p>
             </div>
 
@@ -126,6 +135,7 @@ export default function GalleryClient({ gallery }: GalleryClientProps) {
               <div
                 key={photo._id}
                 onClick={() => setSelectedPhoto(photo)}
+                style={{ position: "relative" }}
                 className="relative aspect-video sm:aspect-square md:aspect-video rounded-2xl overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all border border-gray-100 bg-gray-50 group cursor-pointer"
               >
                 {photo.image ? (
@@ -181,7 +191,7 @@ export default function GalleryClient({ gallery }: GalleryClientProps) {
               </button>
 
               {/* Photo Area */}
-              <div className="relative aspect-video w-full bg-gray-900">
+              <div style={{ position: "relative" }} className="relative aspect-video w-full bg-gray-900">
                 {selectedPhoto.image ? (
                   <Image
                     src={urlFor(selectedPhoto.image).width(1200).height(800).url()}

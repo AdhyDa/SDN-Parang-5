@@ -1,6 +1,6 @@
 import React from "react";
 import { client } from "@/sanity/lib/client";
-import { schoolContactQuery } from "@/sanity/lib/queries";
+import { schoolContactQuery, pageContactQuery } from "@/sanity/lib/queries";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import PageBanner from "../components/PageBanner";
@@ -9,8 +9,14 @@ export const revalidate = 60;
 
 export default async function KontakPage() {
   let contact = null;
+  let contactIntro = null;
   try {
-    contact = await client.fetch(schoolContactQuery);
+    const [contactRes, introRes] = await Promise.all([
+      client.fetch(schoolContactQuery),
+      client.fetch(pageContactQuery)
+    ]);
+    contact = contactRes;
+    contactIntro = introRes;
   } catch (error) {
     console.error("Error fetching contact for KontakPage:", error);
   }
@@ -32,7 +38,10 @@ export default async function KontakPage() {
       <Header />
       <main className="flex-1 bg-white">
         {/* Page Banner */}
-        <PageBanner title="Hubungi Kami" breadcrumbCurrent="Kontak" />
+        <PageBanner 
+          title={contactIntro?.bannerTitle || "Hubungi Kami"} 
+          breadcrumbCurrent={contactIntro?.breadcrumbCurrent || "Kontak"} 
+        />
 
         {/* Info Grid & Interactive Map */}
         <section className="section-padding">
@@ -41,14 +50,13 @@ export default async function KontakPage() {
             <div className="lg:col-span-5 flex flex-col gap-8 bg-white p-6 md:p-8 rounded-2xl border border-gray-100 shadow-sm justify-between">
               <div className="flex flex-col gap-6">
                 <span className="font-heading font-extrabold text-xs uppercase tracking-widest text-amber">
-                  Informasi Kontak
+                  {contactIntro?.introBadge || "Informasi Kontak"}
                 </span>
                 <h2 className="text-2xl md:text-3xl font-extrabold font-heading text-navy -mt-3">
-                  Mari Jalin Hubungan Baik
+                  {contactIntro?.introTitle || "Mari Jalin Hubungan Baik"}
                 </h2>
                 <p className="text-gray-500 font-body text-sm leading-relaxed">
-                  Kami membuka pintu komunikasi selebar-lebarnya bagi wali murid, calon pendaftar PPDB,
-                  maupun instansi mitra untuk koordinasi administrasi pendidikan.
+                  {contactIntro?.introDescription || "Kami membuka pintu komunikasi selebar-lebarnya bagi wali murid, calon pendaftar PPDB, maupun instansi mitra untuk koordinasi administrasi pendidikan."}
                 </p>
 
                 {/* Items */}
@@ -153,10 +161,8 @@ export default async function KontakPage() {
               <span className="font-heading font-bold text-navy text-sm uppercase tracking-wide">
                 Jam Kerja
               </span>
-              <p className="text-gray-600 font-body text-xs md:text-sm mt-1 leading-relaxed">
-                Senin - Sabtu: 07.00 - 13.00 WIB
-                <br />
-                Minggu & Hari Libur Nasional: Tutup
+              <p className="text-gray-600 font-body text-xs md:text-sm mt-1 leading-relaxed whitespace-pre-line">
+                {contact?.workingHours || "Senin - Sabtu: 07.00 - 13.00 WIB\nMinggu & Hari Libur Nasional: Tutup"}
               </p>
             </div>
 
@@ -167,9 +173,9 @@ export default async function KontakPage() {
                 Identitas Sekolah
               </span>
               <p className="text-gray-600 font-body text-xs md:text-sm mt-1 leading-relaxed">
-                NPSN: 20554546
+                NPSN: {contact?.npsn || "20554546"}
                 <br />
-                Status: Sekolah Dasar Negeri (SDN)
+                Status: {contact?.schoolStatus || "Sekolah Dasar Negeri (SDN)"}
               </p>
             </div>
 
@@ -180,9 +186,9 @@ export default async function KontakPage() {
                 Akreditasi
               </span>
               <p className="text-gray-600 font-body text-xs md:text-sm mt-1 leading-relaxed">
-                Akreditasi: B
+                Akreditasi: {contact?.accreditation || "B"}
                 <br />
-                Kurikulum: Kurikulum Merdeka
+                Kurikulum: {contact?.curriculum || "Kurikulum Merdeka"}
               </p>
             </div>
           </div>
