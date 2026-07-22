@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
+import { IconNewspaper, IconImage, IconCalendar, IconArrowRight } from "../Icons";
 
 interface NewsItem {
   _id: string;
@@ -25,7 +26,6 @@ interface NewsGalleryPreviewProps {
 }
 
 export default function NewsGalleryPreview({ news, gallery }: NewsGalleryPreviewProps) {
-  // Fallbacks if data is empty
   const displayedNews =
     news.length > 0
       ? news
@@ -59,63 +59,69 @@ export default function NewsGalleryPreview({ news, gallery }: NewsGalleryPreview
   const displayedGallery = gallery.slice(0, 4);
 
   return (
-    <section className="section-padding bg-white">
-      <div className="container-section grid grid-cols-1 lg:grid-cols-12 gap-12 md:gap-16">
+    <section className="section-padding bg-slate-50 border-t border-slate-200/60">
+      <div className="container-section grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
         {/* Left Column: News (takes 7 cols on lg) */}
         <div className="lg:col-span-7 flex flex-col gap-6">
-          <div className="flex items-center justify-between border-b border-gray-100 pb-4">
-            <h2 className="text-xl md:text-2xl font-extrabold font-heading text-navy">
-              📰 Kabar Terkini Sekolah
-            </h2>
+          <div className="flex items-center justify-between border-b border-slate-200/80 pb-4">
+            <div className="flex items-center gap-2.5">
+              <IconNewspaper size={20} className="text-amber" />
+              <h2 className="text-xl md:text-2xl font-extrabold font-heading text-slate-900">
+                Kabar Terkini Sekolah
+              </h2>
+            </div>
             <Link
               href="/berita"
-              className="text-xs md:text-sm font-heading font-extrabold text-sky hover:text-navy transition-colors"
+              className="text-xs md:text-sm font-heading font-extrabold text-blue-600 hover:text-slate-900 transition-colors flex items-center gap-1"
             >
-              Lihat Semua Berita →
+              <span>Semua Berita</span>
+              <IconArrowRight size={14} />
             </Link>
           </div>
 
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-4">
             {displayedNews.map((item) => (
               <div
                 key={item._id}
-                className="flex gap-4 md:gap-6 items-start group hover:bg-light p-3 rounded-xl transition-all cursor-pointer border border-transparent hover:border-gray-100"
+                className="card-subtle p-4 flex gap-4 md:gap-5 items-start group cursor-pointer"
               >
                 {/* News Thumbnail */}
-                <div className="relative w-20 h-20 md:w-28 md:h-28 rounded-lg overflow-hidden bg-gray-100 flex-shrink-0">
+                <div className="relative w-20 h-20 md:w-24 md:h-24 rounded-xl overflow-hidden bg-slate-100 flex-shrink-0 border border-slate-200/60">
                   {item.mainImage ? (
                     <Image
                       src={urlFor(item.mainImage).width(200).height(200).url()}
                       alt={item.title}
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-500"
-                      sizes="112px"
+                      sizes="96px"
                     />
                   ) : (
-                    <div className="w-full h-full hero-gradient flex items-center justify-center text-white text-2xl">
-                      📓
+                    <div className="w-full h-full bg-slate-900 flex items-center justify-center text-white">
+                      <IconNewspaper size={24} className="text-amber-400" />
                     </div>
                   )}
                 </div>
 
                 {/* News Text */}
-                <div className="flex flex-col gap-1.5 md:gap-2 flex-1 min-w-0">
-                  <span className="text-[10px] md:text-xs text-gray-400 font-body">
-                    📅{" "}
-                    {new Date(item.publishedAt).toLocaleDateString("id-ID", {
-                      year: "numeric",
-                      month: "long",
-                      day: "numeric",
-                    })}
-                  </span>
+                <div className="flex flex-col gap-1 flex-1 min-w-0">
+                  <div className="flex items-center gap-1.5 text-[11px] text-slate-400 font-body">
+                    <IconCalendar size={12} />
+                    <span>
+                      {new Date(item.publishedAt).toLocaleDateString("id-ID", {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      })}
+                    </span>
+                  </div>
                   <Link
                     href={`/berita/${item.slug?.current || ""}`}
-                    className="font-heading font-bold text-navy text-sm md:text-base leading-snug group-hover:text-sky transition-colors line-clamp-2"
+                    className="font-heading font-bold text-slate-900 text-sm md:text-base leading-snug group-hover:text-amber transition-colors line-clamp-2"
                   >
                     {item.title}
                   </Link>
                   {item.excerpt && (
-                    <p className="text-xs md:text-sm text-gray-500 font-body line-clamp-2 leading-relaxed">
+                    <p className="text-xs text-slate-500 font-body line-clamp-2 leading-relaxed mt-0.5">
                       {item.excerpt}
                     </p>
                   )}
@@ -127,24 +133,28 @@ export default function NewsGalleryPreview({ news, gallery }: NewsGalleryPreview
 
         {/* Right Column: Gallery Preview (takes 5 cols on lg) */}
         <div className="lg:col-span-5 flex flex-col gap-6">
-          <div className="flex items-center justify-between border-b border-gray-100 pb-4">
-            <h2 className="text-xl md:text-2xl font-extrabold font-heading text-navy">
-              📸 Dokumentasi Kegiatan
-            </h2>
+          <div className="flex items-center justify-between border-b border-slate-200/80 pb-4">
+            <div className="flex items-center gap-2.5">
+              <IconImage size={20} className="text-amber" />
+              <h2 className="text-xl md:text-2xl font-extrabold font-heading text-slate-900">
+                Dokumentasi Kegiatan
+              </h2>
+            </div>
             <Link
               href="/galeri"
-              className="text-xs md:text-sm font-heading font-extrabold text-sky hover:text-navy transition-colors"
+              className="text-xs md:text-sm font-heading font-extrabold text-blue-600 hover:text-slate-900 transition-colors flex items-center gap-1"
             >
-              Semua Foto →
+              <span>Semua Foto</span>
+              <IconArrowRight size={14} />
             </Link>
           </div>
 
           {displayedGallery.length > 0 ? (
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-3.5">
               {displayedGallery.map((item) => (
                 <div
                   key={item._id}
-                  className="relative aspect-square rounded-xl overflow-hidden shadow-sm group hover:shadow-md hover:-translate-y-0.5 transition-all border border-gray-100 bg-gray-50"
+                  className="relative aspect-square rounded-2xl overflow-hidden card-subtle group bg-slate-100"
                 >
                   <Image
                     src={urlFor(item.image).width(300).height(300).url()}
@@ -153,8 +163,8 @@ export default function NewsGalleryPreview({ news, gallery }: NewsGalleryPreview
                     className="object-cover group-hover:scale-105 transition-transform duration-500"
                     sizes="(max-w-768px) 50vw, 250px"
                   />
-                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3 pointer-events-none">
-                    <p className="text-[10px] text-white font-body line-clamp-2 leading-normal">
+                  <div className="absolute inset-0 bg-slate-950/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3 pointer-events-none">
+                    <p className="text-[11px] text-white font-body line-clamp-2 leading-tight">
                       {item.caption}
                     </p>
                   </div>
@@ -163,22 +173,22 @@ export default function NewsGalleryPreview({ news, gallery }: NewsGalleryPreview
             </div>
           ) : (
             /* Fallback Grid */
-            <div className="grid grid-cols-2 gap-4 text-center">
-              <div className="aspect-square bg-sky/10 text-sky rounded-xl flex flex-col items-center justify-center p-4">
-                <span className="text-3xl mb-1">📖</span>
-                <span className="text-[10px] font-heading font-bold">Belajar Mengajar</span>
+            <div className="grid grid-cols-2 gap-3.5 text-center">
+              <div className="aspect-square bg-white border border-slate-200/80 rounded-2xl flex flex-col items-center justify-center p-4">
+                <span className="text-2xl mb-1">📖</span>
+                <span className="text-xs font-heading font-bold text-slate-800">Belajar Mengajar</span>
               </div>
-              <div className="aspect-square bg-amber/10 text-amber rounded-xl flex flex-col items-center justify-center p-4">
-                <span className="text-3xl mb-1">🎯</span>
-                <span className="text-[10px] font-heading font-bold">Ekstrakurikuler</span>
+              <div className="aspect-square bg-white border border-slate-200/80 rounded-2xl flex flex-col items-center justify-center p-4">
+                <span className="text-2xl mb-1">🎯</span>
+                <span className="text-xs font-heading font-bold text-slate-800">Ekstrakurikuler</span>
               </div>
-              <div className="aspect-square bg-navy/10 text-navy rounded-xl flex flex-col items-center justify-center p-4">
-                <span className="text-3xl mb-1">🌿</span>
-                <span className="text-[10px] font-heading font-bold">Lingkungan</span>
+              <div className="aspect-square bg-white border border-slate-200/80 rounded-2xl flex flex-col items-center justify-center p-4">
+                <span className="text-2xl mb-1">🌿</span>
+                <span className="text-xs font-heading font-bold text-slate-800">Lingkungan</span>
               </div>
-              <div className="aspect-square bg-sky/10 text-sky rounded-xl flex flex-col items-center justify-center p-4">
-                <span className="text-3xl mb-1">🏃‍♂️</span>
-                <span className="text-[10px] font-heading font-bold">Aktivitas Siswa</span>
+              <div className="aspect-square bg-white border border-slate-200/80 rounded-2xl flex flex-col items-center justify-center p-4">
+                <span className="text-2xl mb-1">🏃‍♂️</span>
+                <span className="text-xs font-heading font-bold text-slate-800">Aktivitas Siswa</span>
               </div>
             </div>
           )}

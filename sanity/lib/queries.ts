@@ -20,35 +20,69 @@ export const schoolContactQuery = `*[_type == "schoolContact"][0]{
   phone,
   email,
   mapsUrl,
-  socialMedia
+  socialMedia,
+  workingHours,
+  npsn,
+  schoolStatus,
+  accreditation,
+  curriculum
 }`
 
 // ============================================
-// Single Document Pages
+// Single Document Pages (Section Combined Queries)
 // ============================================
 
-/** Konten homepage (hero, sambutan, statistik) */
-export const pageHomeQuery = `*[_type == "pageHome"][0]{
-  heroTitle,
-  heroSubtitle,
-  heroImage,
-  principalName,
-  principalWelcome,
-  principalPhoto,
-  statsTotalStudents,
-  statsTotalTeachers,
-  statsTotalClassrooms,
-  statsAccreditation
+/** Konten homepage (hero, sambutan, statistik, program) */
+export const pageHomeQuery = `{
+  "hero": *[_type == "homeHero"][0]{ heroTitle, heroSubtitle, heroImage },
+  "welcome": *[_type == "homeWelcome"][0]{ principalName, principalWelcome, principalPhoto },
+  "stats": *[_type == "homeStats"][0]{ statsTotalStudents, statsTotalTeachers, statsTotalClassrooms, statsAccreditation },
+  "programs": *[_type == "homePrograms"][0]{ title, subtitle, programs }
 }`
 
 /** Konten halaman profil sekolah */
-export const pageProfilQuery = `*[_type == "pageProfil"][0]{
-  history,
-  vision,
-  mission,
-  organizationStructure,
-  pembelajaran,
-  tataKelola
+export const pageProfilQuery = `{
+  "history": *[_type == "profilHistory"][0]{ badge, title, history },
+  "visiMisi": *[_type == "profilVisiMisi"][0]{ vision, mission, submission1, submission2 },
+  "structure": *[_type == "profilStructure"][0]{ title, organizationStructure },
+  "kurikulum": *[_type == "profilKurikulum"][0]{ title, pembelajaran },
+  "tataKelola": *[_type == "profilTataKelola"][0]{ title, tataKelola }
+}`
+
+/** Intro halaman Guru */
+export const pageGuruQuery = `*[_type == "pageGuru"][0]{
+  bannerTitle,
+  breadcrumbCurrent,
+  introBadge,
+  introTitle,
+  introDescription
+}`
+
+/** Intro halaman Galeri */
+export const pageGalleryQuery = `*[_type == "pageGallery"][0]{
+  bannerTitle,
+  breadcrumbCurrent,
+  introBadge,
+  introTitle,
+  introDescription
+}`
+
+/** Intro halaman Berita */
+export const pageNewsQuery = `*[_type == "pageNews"][0]{
+  bannerTitle,
+  breadcrumbCurrent,
+  introBadge,
+  introTitle,
+  introDescription
+}`
+
+/** Intro halaman Kontak */
+export const pageContactQuery = `*[_type == "pageContact"][0]{
+  bannerTitle,
+  breadcrumbCurrent,
+  introBadge,
+  introTitle,
+  introDescription
 }`
 
 // ============================================

@@ -2,7 +2,9 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { IconPhone } from "./Icons";
 
 const navItems = [
   { label: "Beranda", href: "/" },
@@ -23,16 +25,12 @@ export default function Header() {
     setIsOpen(false);
   }, [pathname]);
 
-  // Monitor scrolling to change header transparency/styling
+  // Monitor scrolling to adjust floating styling
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 10) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
+      setScrolled(window.scrollY > 15);
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -40,58 +38,71 @@ export default function Header() {
     <header
       className={`sticky top-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-white/85 backdrop-blur-md border-b border-gray-200/40 shadow-sm py-3"
-          : "bg-white/60 backdrop-blur-md border-b border-gray-100/20 py-4"
+          ? "bg-white/90 backdrop-blur-md border-b border-slate-200/80 shadow-xs"
+          : "bg-white/70 backdrop-blur-md border-b border-slate-200/40 py-2"
       }`}
     >
       <div className="container-section flex items-center justify-between">
-        {/* Logo and branding */}
-        <Link href="/" className="flex items-center gap-3 group">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-navy to-sky flex items-center justify-center text-white font-extrabold text-lg shadow-md group-hover:scale-105 transition-transform duration-300">
-            P5
-          </div>
+        {/* Logo and Branding with Official School Emblem */}
+        <Link href="/" className="flex items-center gap-3.5 group">
+          <Image
+            src="/images/logo.png"
+            alt="Logo SDN Parang 5 Kediri"
+            width={500}
+            height={500}
+            className="w-16 h-16 object-contain transition-transform duration-300"
+          />
           <div className="flex flex-col">
-            <span className="font-heading font-extrabold text-navy group-hover:text-navy-light transition-colors duration-300 tracking-tight text-base sm:text-lg leading-none">
+            <span className="font-heading font-extrabold text-slate-900 group-hover:text-amber transition-colors duration-300 tracking-tight text-base sm:text-lg leading-tight">
               SDN Parang 5
             </span>
-            <span className="text-[10px] text-gray-500 font-body font-medium mt-0.5 tracking-wider uppercase">
+            <span className="text-[10px] text-slate-500 font-body font-semibold tracking-wider uppercase">
               Kediri, Jawa Timur
             </span>
           </div>
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center gap-8">
-          <div className="flex items-center gap-6">
-            {navItems.map((item) => {
-              const isActive =
-                pathname === item.href ||
-                (item.href !== "/" && pathname?.startsWith(item.href));
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={`font-heading text-sm py-1 px-0.5 relative transition-colors duration-300 ${
-                    isActive
-                      ? "text-navy font-bold after:scale-x-100"
-                      : "text-gray-600 hover:text-navy font-medium after:scale-x-0"
-                  } after:content-[''] after:absolute after:-bottom-1 after:left-0 after:right-0 after:h-[2.5px] after:bg-amber after:rounded-full hover:after:scale-x-100 after:origin-left after:transition-transform after:duration-300`}
-                >
-                  {item.label}
-                </Link>
-              );
-            })}
-          </div>
+        <nav className="hidden lg:flex items-center gap-1.5 bg-slate-100/70 p-1.5 rounded-full border border-slate-200/60 backdrop-blur-xs">
+          {navItems.map((item) => {
+            const isActive =
+              pathname === item.href ||
+              (item.href !== "/" && pathname?.startsWith(item.href));
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`font-heading text-xs font-semibold px-4 py-2 rounded-full transition-all duration-200 ${
+                  isActive
+                    ? "bg-white text-slate-900 shadow-xs border border-slate-200/60"
+                    : "text-slate-600 hover:text-slate-900 hover:bg-white/50"
+                }`}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
         </nav>
+
+        {/* Desktop CTA Button */}
+        <div className="hidden lg:flex items-center gap-3">
+          <Link
+            href="/kontak"
+            className="btn-primary py-2 px-4 text-xs font-semibold rounded-full flex items-center gap-2"
+          >
+            <IconPhone size={14} />
+            <span>Hubungi Kami</span>
+          </Link>
+        </div>
 
         {/* Mobile menu trigger */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="lg:hidden p-2 rounded-lg text-gray-600 hover:bg-light focus:outline-none focus:ring-2 focus:ring-navy/20"
+          className="lg:hidden p-2.5 rounded-xl text-slate-700 hover:bg-slate-100 focus:outline-none transition-colors border border-slate-200/50"
           aria-label="Toggle navigation menu"
         >
           <svg
-            className="w-6 h-6"
+            className="w-5 h-5"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -115,10 +126,10 @@ export default function Header() {
         </button>
       </div>
 
-      {/* Mobile drawer panel */}
+      {/* Mobile Drawer Panel */}
       <div
-        className={`lg:hidden overflow-hidden transition-all duration-300 bg-white border-t border-gray-100 ${
-          isOpen ? "max-h-screen py-4 shadow-inner" : "max-h-0 py-0"
+        className={`lg:hidden overflow-hidden transition-all duration-300 bg-white/95 backdrop-blur-xl border-b border-slate-200/80 ${
+          isOpen ? "max-h-96 py-4 opacity-100 shadow-lg" : "max-h-0 py-0 opacity-0 pointer-events-none"
         }`}
       >
         <div className="container-section flex flex-col gap-1 px-4">
@@ -132,8 +143,8 @@ export default function Header() {
                 href={item.href}
                 className={`font-heading font-semibold text-sm px-4 py-3 rounded-xl transition-colors ${
                   isActive
-                    ? "bg-navy text-white"
-                    : "text-gray-600 hover:text-navy hover:bg-light"
+                    ? "bg-slate-900 text-white"
+                    : "text-slate-700 hover:text-slate-900 hover:bg-slate-100/70"
                 }`}
               >
                 {item.label}
@@ -142,9 +153,10 @@ export default function Header() {
           })}
           <Link
             href="/kontak"
-            className="mt-3 text-center bg-amber text-gray-900 font-heading font-bold text-sm py-3 rounded-xl transition-all hover:bg-amber-dark"
+            className="mt-2 text-center btn-amber py-3 rounded-xl text-sm font-bold flex items-center justify-center gap-2"
           >
-            Hubungi Kami
+            <IconPhone size={16} />
+            <span>Hubungi Kami</span>
           </Link>
         </div>
       </div>
