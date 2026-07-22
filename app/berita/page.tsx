@@ -7,6 +7,7 @@ import { urlFor } from "@/sanity/lib/image";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import PageBanner from "../components/PageBanner";
+import { IconSparkles, IconNewspaper, IconCalendar, IconArrowRight } from "../components/Icons";
 
 export const revalidate = 60;
 
@@ -33,7 +34,6 @@ export default async function BeritaPage() {
     console.error("Error fetching news from Sanity CMS:", error);
   }
 
-  // Fallbacks if CMS is empty
   const displayedNews =
     news.length > 0
       ? news
@@ -67,44 +67,45 @@ export default async function BeritaPage() {
   return (
     <>
       <Header />
-      <main className="flex-1 bg-white">
+      <main className="flex-1 bg-slate-50">
         {/* Page Banner */}
         <PageBanner 
           title={newsIntro?.bannerTitle || "Berita & Artikel"} 
           breadcrumbCurrent={newsIntro?.breadcrumbCurrent || "Berita"} 
         />
 
-        {/* Kabar Intro */}
+        {/* Intro */}
         <section className="pt-12 pb-6">
-          <div className="container-section text-center max-w-xl">
-            <span className="font-heading font-extrabold text-xs uppercase tracking-widest text-amber mb-2 block">
-              {newsIntro?.introBadge || "Kabar Sekolah"}
+          <div className="container-section text-center max-w-xl flex flex-col items-center">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold font-heading uppercase tracking-wider bg-amber-50 text-amber-700 border border-amber-200/80 mb-3">
+              <IconSparkles size={14} />
+              <span>{newsIntro?.introBadge || "Kabar Sekolah"}</span>
             </span>
-            <h2 className="text-2xl md:text-3xl font-extrabold font-heading text-navy mb-4">
+            <h2 className="text-2xl md:text-3xl font-extrabold font-heading text-slate-900 mb-3">
               {newsIntro?.introTitle || "Kabar Terbaru & Pengumuman Resmi"}
             </h2>
-            <p className="text-gray-500 font-body text-sm leading-relaxed">
+            <p className="text-slate-600 font-body text-sm leading-relaxed">
               {newsIntro?.introDescription || "Ikuti kabar kegiatan pembelajaran terbaru, info pengumuman akademik, PPDB, agenda kerja bakti, serta liputan prestasi siswa-siswi SDN Parang 5."}
             </p>
           </div>
         </section>
 
-        {/* News Feed Grid with Split Featured-List Layout */}
+        {/* News Feed Grid */}
         <section className="pb-16 md:pb-24">
           <div className="container-section grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
             
             {/* Left Column: Featured News Card */}
             {displayedNews.length > 0 && (
               <div className="lg:col-span-7 flex flex-col">
-                <span className="font-heading font-bold text-xs text-amber uppercase tracking-wider mb-3">
-                  🔥 Berita Utama
+                <span className="font-heading font-bold text-xs text-amber-600 uppercase tracking-wider mb-3">
+                  Sorotan Utama
                 </span>
                 {(() => {
                   const featured = displayedNews[0];
                   return (
-                    <div className="bg-white rounded-2xl overflow-hidden card-shadow border border-gray-100 p-5 md:p-6 group cursor-pointer flex flex-col gap-5 h-full">
-                      {/* Landscape Image */}
-                      <div style={{ position: "relative" }} className="relative w-full aspect-video rounded-xl overflow-hidden bg-gray-50 flex-shrink-0">
+                    <div className="card-subtle bg-white p-5 md:p-6 group cursor-pointer flex flex-col gap-5 h-full">
+                      {/* Image */}
+                      <div className="relative w-full aspect-video rounded-2xl overflow-hidden bg-slate-100 flex-shrink-0">
                         {featured.mainImage ? (
                           <Image
                             src={urlFor(featured.mainImage).width(800).height(450).url()}
@@ -115,20 +116,20 @@ export default async function BeritaPage() {
                             priority
                           />
                         ) : (
-                          <div className="w-full h-full hero-gradient flex items-center justify-center text-white text-5xl">
-                            📓
+                          <div className="w-full h-full bg-slate-900 flex items-center justify-center text-white">
+                            <IconNewspaper size={48} className="text-amber-400" />
                           </div>
                         )}
-                        <div className="absolute top-4 left-4 bg-navy text-white text-[10px] font-heading font-extrabold tracking-wider uppercase px-3 py-1 rounded-full shadow-md z-10">
-                          Sorotan
+                        <div className="absolute top-3 left-3 bg-slate-900 text-white text-[10px] font-heading font-extrabold tracking-wider uppercase px-3 py-1 rounded-full shadow-xs z-10">
+                          Berita Utama
                         </div>
                       </div>
 
                       {/* Content */}
                       <div className="flex flex-col gap-3 flex-grow justify-between">
                         <div className="flex flex-col gap-2">
-                          <span className="text-xs text-gray-400 font-body flex items-center gap-1.5">
-                            <span>📅</span>
+                          <span className="text-xs text-slate-400 font-body flex items-center gap-1.5">
+                            <IconCalendar size={12} />
                             <span>
                               {new Date(featured.publishedAt).toLocaleDateString("id-ID", {
                                 year: "numeric",
@@ -139,12 +140,12 @@ export default async function BeritaPage() {
                           </span>
                           <Link
                             href={`/berita/${featured.slug?.current || ""}`}
-                            className="font-heading font-extrabold text-navy text-xl md:text-2xl group-hover:text-sky transition-colors leading-snug"
+                            className="font-heading font-extrabold text-slate-900 text-xl md:text-2xl group-hover:text-amber transition-colors leading-snug"
                           >
                             {featured.title}
                           </Link>
                           {featured.excerpt && (
-                            <p className="text-gray-500 font-body text-sm md:text-base leading-relaxed line-clamp-3">
+                            <p className="text-slate-600 font-body text-sm md:text-base leading-relaxed line-clamp-3">
                               {featured.excerpt}
                             </p>
                           )}
@@ -152,10 +153,10 @@ export default async function BeritaPage() {
 
                         <Link
                           href={`/berita/${featured.slug?.current || ""}`}
-                          className="inline-flex items-center gap-1 font-heading font-extrabold text-sky hover:text-navy transition-colors text-sm w-fit mt-2"
+                          className="inline-flex items-center gap-1.5 font-heading font-extrabold text-amber-600 hover:text-slate-900 transition-colors text-sm w-fit mt-2"
                         >
-                          Baca Selengkapnya
-                          <span>→</span>
+                          <span>Baca Selengkapnya</span>
+                          <IconArrowRight size={14} />
                         </Link>
                       </div>
                     </div>
@@ -166,17 +167,17 @@ export default async function BeritaPage() {
 
             {/* Right Column: Supporting News List */}
             <div className="lg:col-span-5 flex flex-col">
-              <span className="font-heading font-bold text-xs text-gray-500 uppercase tracking-wider mb-3">
-                📰 Berita Lainnya
+              <span className="font-heading font-bold text-xs text-slate-500 uppercase tracking-wider mb-3">
+                Berita Lainnya
               </span>
               <div className="flex flex-col gap-4">
                 {displayedNews.slice(1).map((item) => (
                   <div
                     key={item._id}
-                    className="bg-white rounded-xl card-shadow border border-gray-100/80 p-3 flex gap-4 items-start group cursor-pointer hover:border-amber/20 hover:-translate-y-0.5 transition-all duration-300"
+                    className="card-subtle bg-white p-4 flex gap-4 items-start group cursor-pointer"
                   >
-                    {/* Small Square Thumbnail */}
-                    <div style={{ position: "relative" }} className="relative w-20 h-20 md:w-24 md:h-24 rounded-lg overflow-hidden bg-gray-50 flex-shrink-0">
+                    {/* Thumbnail */}
+                    <div className="relative w-20 h-20 md:w-24 md:h-24 rounded-xl overflow-hidden bg-slate-100 flex-shrink-0 border border-slate-200/60">
                       {item.mainImage ? (
                         <Image
                           src={urlFor(item.mainImage).width(200).height(200).url()}
@@ -186,42 +187,33 @@ export default async function BeritaPage() {
                           sizes="96px"
                         />
                       ) : (
-                        <div className="w-full h-full hero-gradient flex items-center justify-center text-white text-3xl">
-                          📓
+                        <div className="w-full h-full bg-slate-900 flex items-center justify-center text-white">
+                          <IconNewspaper size={24} className="text-amber-400" />
                         </div>
                       )}
                     </div>
 
                     {/* Short Info */}
-                    <div className="flex flex-col gap-1.5 flex-1 min-w-0">
-                      <span className="text-[10px] text-gray-400 font-body">
-                        📅{" "}
-                        {new Date(item.publishedAt).toLocaleDateString("id-ID", {
-                          year: "numeric",
-                          month: "long",
-                          day: "numeric",
-                        })}
+                    <div className="flex flex-col gap-1 flex-1 min-w-0">
+                      <span className="text-[11px] text-slate-400 font-body flex items-center gap-1">
+                        <IconCalendar size={12} />
+                        <span>
+                          {new Date(item.publishedAt).toLocaleDateString("id-ID", {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric",
+                          })}
+                        </span>
                       </span>
                       <Link
                         href={`/berita/${item.slug?.current || ""}`}
-                        className="font-heading font-bold text-navy text-sm md:text-base leading-snug group-hover:text-sky transition-colors line-clamp-2"
+                        className="font-heading font-bold text-slate-900 text-sm md:text-base leading-snug group-hover:text-amber transition-colors line-clamp-2"
                       >
                         {item.title}
                       </Link>
-                      {item.excerpt && (
-                        <p className="text-xs text-gray-500 font-body line-clamp-1 leading-normal">
-                          {item.excerpt}
-                        </p>
-                      )}
                     </div>
                   </div>
                 ))}
-
-                {displayedNews.length <= 1 && (
-                  <div className="text-center py-10 bg-light rounded-xl border border-dashed border-gray-300 text-gray-400 text-xs">
-                    Tidak ada berita tambahan saat ini.
-                  </div>
-                )}
               </div>
             </div>
 

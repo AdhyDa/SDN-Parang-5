@@ -1,7 +1,9 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { client } from "@/sanity/lib/client";
 import { schoolContactQuery } from "@/sanity/lib/queries";
+import { IconMapPin, IconPhone, IconMail } from "./Icons";
 
 export default async function Footer() {
   let contact = null;
@@ -18,82 +20,34 @@ export default async function Footer() {
   const email = contact?.email || "sdn.parang.v@gmail.com";
 
   return (
-    <footer className="bg-navy text-white font-body">
+    <footer className="bg-slate-900 text-white font-body border-t border-slate-800 relative">
       {/* Main Footer Info */}
-      <div className="container-section py-12 md:py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
-        {/* Col 1: About */}
-        <div className="flex flex-col gap-4">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-white font-extrabold text-lg">
-              P5
-            </div>
-            <span className="font-heading font-extrabold text-white tracking-tight text-lg sm:text-xl leading-none">
+      <div className="container-section py-12 md:py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12">
+        {/* Col 1: About (takes 4 cols) */}
+        <div className="lg:col-span-4 flex flex-col gap-4">
+          <Link href="/" className="flex items-center gap-3.5 group">
+            <Image
+              src="/images/logo.png"
+              alt="Logo SDN Parang 5 Kediri"
+              width={500}
+              height={500}
+              className="w-16 h-16 object-contain"
+            />
+            <span className="font-heading font-extrabold text-white tracking-tight text-xl leading-none">
               SDN Parang 5
             </span>
-          </div>
-          <p className="text-gray-300 text-sm leading-relaxed mt-2">
-            Mewujudkan generasi cerdas, mandiri, berkarakter mulia, dan peduli
+          </Link>
+          <p className="text-slate-400 text-sm leading-relaxed max-w-sm mt-1">
+            Mewujudkan generasi bertakwa, berkarakter, berkompeten, dan peduli
             lingkungan berlandaskan nilai kearifan lokal.
           </p>
-        </div>
-
-        {/* Col 2: Navigation Links */}
-        <div>
-          <h3 className="font-heading font-bold text-base tracking-tight text-amber mb-4 uppercase">
-            Jelajahi
-          </h3>
-          <ul className="flex flex-col gap-2.5 text-sm">
-            <li>
-              <Link href="/profil" className="text-gray-300 hover:text-white transition-colors">
-                Profil Sekolah
-              </Link>
-            </li>
-            <li>
-              <Link href="/guru" className="text-gray-300 hover:text-white transition-colors">
-                Direktori Guru
-              </Link>
-            </li>
-            <li>
-              <Link href="/galeri" className="text-gray-300 hover:text-white transition-colors">
-                Galeri Kegiatan
-              </Link>
-            </li>
-            <li>
-              <Link href="/berita" className="text-gray-300 hover:text-white transition-colors">
-                Kabar & Pengumuman
-              </Link>
-            </li>
-          </ul>
-        </div>
-
-        {/* Col 3: Contact */}
-        <div className="lg:col-span-2">
-          <h3 className="font-heading font-bold text-base tracking-tight text-amber mb-4 uppercase">
-            Kontak & Alamat
-          </h3>
-          <ul className="flex flex-col gap-3 text-sm text-gray-300">
-            <li className="flex items-start gap-3">
-              <span className="text-lg mt-0.5" role="img" aria-label="Alamat">📍</span>
-              <span className="leading-relaxed">{address}</span>
-            </li>
-            <li className="flex items-center gap-3">
-              <span className="text-lg" role="img" aria-label="Telepon">📞</span>
-              <span>{phone}</span>
-            </li>
-            <li className="flex items-center gap-3">
-              <span className="text-lg" role="img" aria-label="Email">✉️</span>
-              <a href={`mailto:${email}`} className="hover:text-white transition-colors">
-                {email}
-              </a>
-            </li>
-          </ul>
-          {/* Social Media Link Icons */}
-          <div className="flex gap-4 mt-6">
+          {/* Social Links */}
+          <div className="flex items-center gap-3 mt-2">
             <a
               href="https://www.youtube.com/@sdnparang5644"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 hover:scale-105 transition-all text-white"
+              className="w-9 h-9 rounded-xl bg-slate-800 border border-slate-700/80 flex items-center justify-center hover:bg-slate-700 hover:text-amber transition-all text-slate-300"
               title="YouTube"
             >
               <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -104,7 +58,7 @@ export default async function Footer() {
               href="https://www.instagram.com/sdnegeriparang5"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 hover:scale-105 transition-all text-white"
+              className="w-9 h-9 rounded-xl bg-slate-800 border border-slate-700/80 flex items-center justify-center hover:bg-slate-700 hover:text-amber transition-all text-slate-300"
               title="Instagram"
             >
               <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -113,16 +67,68 @@ export default async function Footer() {
             </a>
           </div>
         </div>
+
+        {/* Col 2: Navigation Links (takes 3 cols) */}
+        <div className="lg:col-span-3">
+          <h3 className="font-heading font-bold text-xs uppercase tracking-wider text-amber-400 mb-4">
+            Jelajahi
+          </h3>
+          <ul className="flex flex-col gap-2.5 text-sm">
+            <li>
+              <Link href="/profil" className="text-slate-400 hover:text-white transition-colors">
+                Profil Sekolah
+              </Link>
+            </li>
+            <li>
+              <Link href="/guru" className="text-slate-400 hover:text-white transition-colors">
+                Direktori Guru
+              </Link>
+            </li>
+            <li>
+              <Link href="/galeri" className="text-slate-400 hover:text-white transition-colors">
+                Galeri Kegiatan
+              </Link>
+            </li>
+            <li>
+              <Link href="/berita" className="text-slate-400 hover:text-white transition-colors">
+                Kabar & Pengumuman
+              </Link>
+            </li>
+          </ul>
+        </div>
+
+        {/* Col 3: Contact (takes 5 cols) */}
+        <div className="lg:col-span-5">
+          <h3 className="font-heading font-bold text-xs uppercase tracking-wider text-amber-400 mb-4">
+            Kontak & Alamat
+          </h3>
+          <ul className="flex flex-col gap-3.5 text-sm text-slate-400">
+            <li className="flex items-start gap-3">
+              <IconMapPin size={18} className="text-amber-400 flex-shrink-0 mt-0.5" />
+              <span className="leading-relaxed">{address}</span>
+            </li>
+            <li className="flex items-center gap-3">
+              <IconPhone size={18} className="text-amber-400 flex-shrink-0" />
+              <span>{phone}</span>
+            </li>
+            <li className="flex items-center gap-3">
+              <IconMail size={18} className="text-amber-400 flex-shrink-0" />
+              <a href={`mailto:${email}`} className="hover:text-white transition-colors">
+                {email}
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
 
       {/* Copyright Bar */}
-      <div className="border-t border-white/10 py-6 text-center text-xs text-gray-400 md:text-gray-400 font-body">
-        <div className="container-section flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div className="border-t border-slate-800 py-6 text-xs text-slate-400 font-body">
+        <div className="container-section flex flex-col sm:flex-row items-center justify-between gap-3">
           <span>
-            © {new Date().getFullYear()} SDN Parang 5. Hak Cipta Dilindungi.
+            © {new Date().getFullYear()} SDN Parang 5 Kediri. Hak Cipta Dilindungi.
           </span>
-          <span className="text-gray-500 md:text-gray-400">
-            Dikembangkan oleh Mahasiswa KKN Universitas Negeri Malang
+          <span className="text-slate-400">
+            Dikembangkan oleh Mahasiswa UM-BBM 2026
           </span>
         </div>
       </div>

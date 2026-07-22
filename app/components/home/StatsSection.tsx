@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import { IconGraduationCap, IconUsers, IconSchool, IconStar, IconSparkles } from "../Icons";
 
 interface StatsSectionProps {
   data: {
@@ -31,7 +32,7 @@ export default function StatsSection({ data }: StatsSectionProps) {
           setHasAnimated(true);
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.15 }
     );
 
     if (sectionRef.current) {
@@ -48,9 +49,8 @@ export default function StatsSection({ data }: StatsSectionProps) {
   useEffect(() => {
     if (!hasAnimated) return;
 
-    // Simple counter animation
-    const duration = 1200; // Total duration in ms
-    const frameRate = 1000 / 60; // 60 FPS
+    const duration = 1200;
+    const frameRate = 1000 / 60;
     const totalFrames = Math.round(duration / frameRate);
 
     let frame = 0;
@@ -74,66 +74,117 @@ export default function StatsSection({ data }: StatsSectionProps) {
   }, [hasAnimated, targetStudents, targetTeachers, targetClassrooms]);
 
   return (
-    <section ref={sectionRef} className="py-12 md:py-16 bg-white overflow-hidden">
-      <div className="container-section">
-        {/* Floating dark gradient card */}
-        <div className="relative bg-gradient-to-br from-navy via-navy-dark to-[#0f1d47] rounded-[32px] p-8 md:p-12 shadow-2xl border border-white/5 overflow-hidden">
-          {/* Background decorations */}
-          <div className="absolute -top-12 -left-12 w-64 h-64 bg-sky/10 rounded-full blur-3xl pointer-events-none animate-pulse" />
-          <div className="absolute -bottom-16 -right-16 w-80 h-80 bg-amber/10 rounded-full blur-3xl pointer-events-none" />
+    <section ref={sectionRef} className="py-16 md:py-24 bg-white relative overflow-hidden">
+      {/* Subtle Background Glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[300px] bg-slate-100/80 rounded-full blur-3xl pointer-events-none" />
 
-          {/* Grid with mobile/desktop dividing borders */}
-          <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-y-8 gap-x-4 text-center lg:divide-x lg:divide-white/5">
-            {/* Stat Item: Students */}
-            <div className="flex flex-col items-center justify-center py-4 px-2 lg:px-6">
-              <div className="w-12 h-12 rounded-xl bg-white/10 text-white flex items-center justify-center text-xl mb-3 shadow-inner">
-                🎓
+      <div className="container-section relative z-10">
+        {/* Section Header */}
+        <div className="text-center max-w-xl mx-auto mb-12 flex flex-col items-center">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold font-heading uppercase tracking-wider bg-slate-100 text-slate-700 border border-slate-200/80 mb-3">
+            <IconSparkles size={14} className="text-amber-500" />
+            <span>Fakta & Statistik Sekolah</span>
+          </div>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold font-heading text-slate-900 tracking-tight">
+            Kualitas Pendidikan Dalam Angka
+          </h2>
+        </div>
+
+        {/* Bento Cards Grid */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+          {/* Card 1: Students */}
+          <div className="card-subtle p-6 md:p-8 flex flex-col justify-between gap-6 group hover:border-blue-200 hover:bg-gradient-to-b hover:from-white hover:to-blue-50/30">
+            <div className="flex items-center justify-between">
+              <div className="w-12 h-12 rounded-2xl bg-blue-50 text-blue-600 border border-blue-100 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                <IconGraduationCap size={24} />
               </div>
-              <span className="text-3xl md:text-4xl lg:text-5xl font-extrabold font-heading text-white tracking-tight leading-none">
+              <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-blue-50 text-blue-700 border border-blue-100">
+                Aktif
+              </span>
+            </div>
+
+            <div>
+              <span className="text-3xl sm:text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight leading-none block">
                 {students}
               </span>
-              <span className="text-xs md:text-sm font-semibold font-body text-white/70 mt-3 tracking-wider uppercase">
+              <h3 className="text-sm font-bold font-heading text-slate-700 mt-2">
                 Siswa Aktif
+              </h3>
+              <p className="text-xs text-slate-500 font-body mt-1 leading-normal">
+                Peserta didik terdaftar dari kelas 1 sampai kelas 6.
+              </p>
+            </div>
+          </div>
+
+          {/* Card 2: Teachers */}
+          <div className="card-subtle p-6 md:p-8 flex flex-col justify-between gap-6 group hover:border-emerald-200 hover:bg-gradient-to-b hover:from-white hover:to-emerald-50/30">
+            <div className="flex items-center justify-between">
+              <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 border border-emerald-100 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                <IconUsers size={24} />
+              </div>
+              <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-100">
+                Pendidik
               </span>
             </div>
 
-            {/* Stat Item: Teachers */}
-            <div className="flex flex-col items-center justify-center py-4 px-2 lg:px-6">
-              <div className="w-12 h-12 rounded-xl bg-white/10 text-white flex items-center justify-center text-xl mb-3 shadow-inner">
-                👩‍🏫
-              </div>
-              <span className="text-3xl md:text-4xl lg:text-5xl font-extrabold font-heading text-white tracking-tight leading-none">
+            <div>
+              <span className="text-3xl sm:text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight leading-none block">
                 {teachers}
               </span>
-              <span className="text-xs md:text-sm font-semibold font-body text-white/70 mt-3 tracking-wider uppercase">
+              <h3 className="text-sm font-bold font-heading text-slate-700 mt-2">
                 Guru & Staff
+              </h3>
+              <p className="text-xs text-slate-500 font-body mt-1 leading-normal">
+                Tenaga pendidik profesional dan berkualifikasi.
+              </p>
+            </div>
+          </div>
+
+          {/* Card 3: Classrooms */}
+          <div className="card-subtle p-6 md:p-8 flex flex-col justify-between gap-6 group hover:border-indigo-200 hover:bg-gradient-to-b hover:from-white hover:to-indigo-50/30">
+            <div className="flex items-center justify-between">
+              <div className="w-12 h-12 rounded-2xl bg-indigo-50 text-indigo-600 border border-indigo-100 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                <IconSchool size={24} />
+              </div>
+              <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-100">
+                Fasilitas
               </span>
             </div>
 
-            {/* Stat Item: Classrooms */}
-            <div className="flex flex-col items-center justify-center py-4 px-2 lg:px-6">
-              <div className="w-12 h-12 rounded-xl bg-white/10 text-white flex items-center justify-center text-xl mb-3 shadow-inner">
-                🏫
-              </div>
-              <span className="text-3xl md:text-4xl lg:text-5xl font-extrabold font-heading text-white tracking-tight leading-none">
+            <div>
+              <span className="text-3xl sm:text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight leading-none block">
                 {classrooms}
               </span>
-              <span className="text-xs md:text-sm font-semibold font-body text-white/70 mt-3 tracking-wider uppercase">
+              <h3 className="text-sm font-bold font-heading text-slate-700 mt-2">
                 Ruang Kelas
+              </h3>
+              <p className="text-xs text-slate-500 font-body mt-1 leading-normal">
+                Ruang belajar kondusif ramah anak.
+              </p>
+            </div>
+          </div>
+
+          {/* Card 4: Accreditation */}
+          <div className="card-subtle p-6 md:p-8 flex flex-col justify-between gap-6 group hover:border-amber-200 hover:bg-gradient-to-b hover:from-white hover:to-amber-50/30">
+            <div className="flex items-center justify-between">
+              <div className="w-12 h-12 rounded-2xl bg-amber-50 text-amber-600 border border-amber-200 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                <IconStar size={24} className="fill-amber-500" />
+              </div>
+              <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-amber-50 text-amber-800 border border-amber-200">
+                BAN-S/M
               </span>
             </div>
 
-            {/* Stat Item: Accreditation */}
-            <div className="flex flex-col items-center justify-center py-4 px-2 lg:px-6">
-              <div className="w-12 h-12 rounded-xl bg-white/10 text-white flex items-center justify-center text-xl mb-3 shadow-inner">
-                ⭐
-              </div>
-              <span className="text-3xl md:text-4xl lg:text-5xl font-extrabold font-heading text-amber-light tracking-tight leading-none">
+            <div>
+              <span className="text-3xl sm:text-4xl md:text-5xl font-extrabold font-heading text-amber-600 tracking-tight leading-none block">
                 {accreditation}
               </span>
-              <span className="text-xs md:text-sm font-semibold font-body text-white/70 mt-3 tracking-wider uppercase">
-                Akreditasi
-              </span>
+              <h3 className="text-sm font-bold font-heading text-slate-700 mt-2">
+                Akreditasi Sekolah
+              </h3>
+              <p className="text-xs text-slate-500 font-body mt-1 leading-normal">
+                Penilaian resmi mutu pendidikan pemerintah.
+              </p>
             </div>
           </div>
         </div>
