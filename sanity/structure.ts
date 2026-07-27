@@ -24,7 +24,8 @@ export const structure: StructureResolver = (S) =>
     .items([
       // ── Pengaturan Umum ──
       S.listItem()
-        .title('⚙️ Pengaturan Umum')
+        .title('Pengaturan Umum')
+        .icon(CogIcon)
         .child(
           S.list()
             .title('Pengaturan Umum')
@@ -52,14 +53,16 @@ export const structure: StructureResolver = (S) =>
 
       // ── Halaman (Per-Halaman & Per-Section) ──
       S.listItem()
-        .title('📄 Halaman')
+        .title('Kelola Halaman')
+        .icon(DocumentTextIcon)
         .child(
           S.list()
             .title('Kelola Halaman')
             .items([
               // 1. Beranda
               S.listItem()
-                .title('🏠 Beranda (Homepage)')
+                .title('Beranda (Homepage)')
+                .icon(HomeIcon)
                 .child(
                   S.list()
                     .title('Seksi Halaman Beranda')
@@ -101,7 +104,8 @@ export const structure: StructureResolver = (S) =>
 
               // 2. Profil
               S.listItem()
-                .title('📖 Profil Sekolah')
+                .title('Profil Sekolah')
+                .icon(BookIcon)
                 .child(
                   S.list()
                     .title('Seksi Halaman Profil')
@@ -151,7 +155,8 @@ export const structure: StructureResolver = (S) =>
 
               // 3. Guru & Staff
               S.listItem()
-                .title('👨‍🏫 Guru & Staff')
+                .title('Guru & Staff')
+                .icon(UsersIcon)
                 .child(
                   S.list()
                     .title('Kelola Halaman Guru')
@@ -172,7 +177,8 @@ export const structure: StructureResolver = (S) =>
 
               // 4. Galeri Foto
               S.listItem()
-                .title('📸 Galeri Foto')
+                .title('Galeri Foto')
+                .icon(ImagesIcon)
                 .child(
                   S.list()
                     .title('Kelola Halaman Galeri')
@@ -193,7 +199,8 @@ export const structure: StructureResolver = (S) =>
 
               // 5. Berita & Artikel
               S.listItem()
-                .title('📰 Berita & Artikel')
+                .title('Berita & Artikel')
+                .icon(CalendarIcon)
                 .child(
                   S.list()
                     .title('Kelola Halaman Berita')
@@ -214,7 +221,8 @@ export const structure: StructureResolver = (S) =>
 
               // 6. Kontak
               S.listItem()
-                .title('📞 Hubungi Kami (Kontak)')
+                .title('Hubungi Kami (Kontak)')
+                .icon(EnvelopeIcon)
                 .child(
                   S.list()
                     .title('Kelola Halaman Kontak')
