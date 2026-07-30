@@ -17,25 +17,47 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://sdnparang5.vercel.app"),
   title: {
-    default: "SDN Parang 5 — Home",
-    template: "%s | SDN Parang 5",
+    default: "SDN Parang 5 Kediri - Website Resmi Sekolah",
+    template: "%s | SDN Parang 5 Kediri",
   },
   description:
-    "Website resmi SDN Parang 5. Sekolah dasar negeri dengan program unggulan pembentukan karakter, literasi, lingkungan, dan teknologi. Temukan informasi profil, guru, prestasi, dan pendaftaran siswa baru.",
+    "Portal informasi resmi SD Negeri Parang 5, Kec. Banyakan, Kab. Kediri. Menampilkan profil sekolah, pengumuman, kegiatan siswa, dan galeri prestasi.",
   keywords: [
     "SDN Parang 5",
-    "sekolah dasar",
-    "pendidikan",
-    "PPDB",
-    "sekolah unggulan",
+    "SDN Parang 5 Kediri",
+    "SD Negeri Parang 5",
+    "Sekolah Dasar Kediri",
+    "SD Banyakan Kediri",
+    "Pendidikan Desa Parang",
+    "PPDB SDN Parang 5",
+    "Sekolah Dasar Banyakan",
   ],
+  authors: [{ name: "Adhyaksa Daudi" }],
   openGraph: {
-    title: "SDN Parang 5 — Home",
+    title: "SDN Parang 5 Kediri - Website Resmi Sekolah",
     description:
-      "Website resmi SDN Parang 5. Sekolah dasar negeri dengan program unggulan pembentukan karakter.",
-    type: "website",
+      "Mewujudkan generasi cerdas, berkarakter, dan berbudaya di Desa Parang, Kediri.",
+    url: "https://sdnparang5.vercel.app",
+    siteName: "SDN Parang 5 Kediri",
     locale: "id_ID",
+    type: "website",
+    images: [
+      {
+        url: "/og.png",
+        width: 1200,
+        height: 630,
+        alt: "SDN Parang 5 Kediri",
+      },
+    ],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  verification: {
+    google: "LZO8t5Y5mUkG2Atixr4WGF_eNXPMmei7cUzhm0hRPkQ",
   },
 };
 
